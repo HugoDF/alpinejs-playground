@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AlpineJS body "reflect" Function Example</title>
+
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.0.2/dist/alpine.js"
+      defer
+    ></script>
+  </head>
+
+  <body>
+    <h2 data-reflect-ignore>Demo</h2>
+    <div x-data="reflect()">
+      <h2>Code</h2>
+      <pre><code x-text="content()"></code></pre>
+    </div>
+    <script>
+      function reflect() {
+        return {
+          content() {
+            const topLevelChildren = Array.from(document.body.children);
+            return topLevelChildren
+              .filter(el => !el.dataset.hasOwnProperty("reflectIgnore"))
+              .map(el => el.innerHTML)
+              .join("\n");
+          }
+        };
+      }
+    </script>
+  </body>
+</html>

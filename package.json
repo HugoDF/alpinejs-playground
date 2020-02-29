@@ -1,0 +1,20 @@
+{
+  "name": "alpinejs-playground",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A set of useful AlpineJS examples",
+  "scripts": {
+    "start": "serve pages",
+    "format": "prettier ./pages/*.html README.md --write"
+  },
+  "keywords": [
+    "alpinejs"
+  ],
+  "author": "Hugo Di Francesco",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "prettier": "^1.19.1",
+    "serve": "^11.3.0"
+  }
+}

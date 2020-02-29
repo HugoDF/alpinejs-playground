@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AlpineJS bound "select" and access selection data Example</title>
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.0.2/dist/alpine.js"
+      defer
+    ></script>
+  </head>
+  <body>
+    <div x-data="page()">
+      <h2>Demo</h2>
+      <select x-model="selectedOption">
+        <option value="">Select an option</option>
+        <template x-for="option in options">
+          <option
+            :key="option.value"
+            :value="option.value"
+            x-text="option.text"
+          >
+          </option>
+        </template>
+      </select>
+      <button @click="access()">Access Data</button>
+      <div x-ref="output"></div>
+    </div>
+    <script>
+      function page() {
+        return {
+          selectedOption: "",
+          options: [
+            {
+              value: "bacon",
+              text: "Bacon"
+            },
+            {
+              value: "ham",
+              text: "Ham"
+            }
+          ],
+          access() {
+            this.$refs.output.innerText = this.selectedOption;
+          }
+        };
+      }
+    </script>
+
+    <div x-data="reflect()" data-reflect-ignore>
+      <h2>Code</h2>
+      <pre>
+      <code x-text="content()">
+      </code>
+    </pre>
+    </div>
+    <script data-reflect-ignore>
+      function reflect() {
+        return {
+          content() {
+            const topLevelChildren = Array.from(document.body.children);
+            return topLevelChildren
+              .filter(el => !el.dataset.hasOwnProperty("reflectIgnore"))
+              .map(el => el.innerHTML)
+              .join("\n");
+          }
+        };
+      }
+    </script>
+  </body>
+</html>

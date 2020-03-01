@@ -15,28 +15,91 @@
   </head>
 
   <body class="flex flex-row">
-    <div x-data="page()" class="w-1/3 flex flex-col">
-      <input type="text" name="pokemonSearch" x-model="pokemonSearch" />
-      <button type="submit" @click="fetchPokemon()">Search</button>
-      <div>Output: <span x-text="str(pokemon)"></span></div>
+    <div
+      x-data="page()"
+      x-init="fetchPokemon()"
+      class="w-1/3 flex flex-col"
+      data-reflect-root
+    >
+      <h2 class="text-lg font-md mb-16">Demo</h2>
+      <div class="flex flex-row">
+        <input
+          type="text"
+          name="pokemonSearch"
+          x-model="pokemonSearch"
+          class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
+        />
+        <button
+          type="submit"
+          @click="fetchPokemon()"
+          class="w-24 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          <template x-if="!isLoading"><span>Search</span></template>
+          <template x-if="isLoading"><span>...</span></template>
+        </button>
+      </div>
+      <template x-if="pokemon">
+        <div class="flex flex-row">
+          <img
+            class="w-1/4 flex mr-4"
+            :src="pokemon.sprites.front_default"
+            :alt="pokemon.name"
+          />
+          <div class="text-sm justify-center flex flex-col">
+            <h3
+              class="text-gray-900 text-sm font-bold uppercase leading-none mb-2"
+              x-text="pokemon.name"
+            ></h3>
+            <div class="flex flex-row flex-wrap">
+              <template
+                x-for="abilityObj in pokemon.abilities"
+                :key="abilityObj.ability.url"
+              >
+                <span
+                  x-text="abilityObj.ability.name"
+                  class="flex bg-gray-200 rounded-full px-3 py-1 text-xs font-semibold text-gray-700"
+                ></span>
+              </template>
+            </div>
+          </div>
+        </div>
+      </template>
+      <script>
+        function page() {
+          return {
+            pokemonSearch: "charizard",
+            pokemon: null,
+            isLoading: false,
+            fetchPokemon() {
+              this.isLoading = true;
+              fetch(`https://pokeapi.co/api/v2/pokemon/${this.pokemonSearch}`)
+                .then(res => res.json())
+                .then(data => {
+                  this.isLoading = false;
+                  this.pokemon = data;
+                });
+            }
+          };
+        }
+      </script>
     </div>
-    <script>
-      function page() {
-        return {
-          pokemonSearch: "charizard",
-          pokemon: {},
-          str(obj) {
-            return JSON.stringify(obj, null, 2);
-          },
-          fetchPokemon() {
-            fetch(`https://pokeapi.co/api/v2/pokemon/${this.pokemonSearch}`)
-              .then(res => res.json())
-              .then(data => {
-                this.pokemon = data;
-              });
-          }
-        };
-      }
-    </script>
+    <div
+      x-data="reflect()"
+      data-reflect-ignore
+      class="w-2/3 flex flex-col overflow-scroll"
+    >
+      <h2>Code</h2>
+      <button
+        @click="toggleShowClass()"
+        class="inline-block w-48 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
+        <template x-if="showClass">
+          <span>Hide classes</span>
+        </template>
+        <template x-if="!showClass"><span>Show classes</span></template>
+      </button>
+      <pre><code class="w-full inline-block" x-text="content()"></code></pre>
+      <script src="./reflect.js"></script>
+    </div>
   </body>
 </html>

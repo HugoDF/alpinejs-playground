@@ -5,7 +5,7 @@
   "description": "A set of useful AlpineJS examples",
   "scripts": {
     "start": "serve pages",
-    "format": "prettier ./pages/*.html README.md --write"
+    "format": "prettier ./pages/* README.md --write"
   },
   "keywords": [
     "alpinejs"

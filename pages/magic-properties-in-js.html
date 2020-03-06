@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AlpineJS Playground Magic Property Access in JS</title>
+    <title>Alpine.js Playground - Magic Property Access in JavaScript</title>
     <link
       href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
       rel="stylesheet"
@@ -29,24 +29,24 @@
         Do
       </button>
       <label class="block">Output: "<span x-text="output"></span>"</label>
+      <script>
+        function page() {
+          return {
+            output: "",
+            init({ $el, $refs, $dispatch, $nextTick }) {
+              // $el, $refs, $dispatch, $nextTick are
+              // **not** defined in x-init handler
+              console.log($dispatch());
+            },
+            hello() {
+              // $el, $refs, $dispatch, $nextTick are
+              // defined in other functions
+              this.$nextTick();
+            }
+          };
+        }
+      </script>
     </div>
-    <script>
-      function page() {
-        return {
-          output: "",
-          init({ $el, $refs, $dispatch, $nextTick }) {
-            // $el, $refs, $dispatch, $nextTick are
-            // **not** defined in x-init handler
-            console.log($dispatch());
-          },
-          hello() {
-            // $el, $refs, $dispatch, $nextTick are
-            // defined in other functions
-            this.$nextTick();
-          }
-        };
-      }
-    </script>
 
     <div
       x-data="reflect()"

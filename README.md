@@ -1,6 +1,6 @@
-# AlpineJS Playground
+# Alpine.js Playground
 
-AlpineJS examples not explictly covered in the core documentation.
+Alpine.js examples not explictly covered in the core documentation.
 
 Find the examples in the [pages](./pages) directory.
 

@@ -5,7 +5,7 @@
   "description": "A set of useful Alpine.js examples",
   "scripts": {
     "build": "node scripts/build-index.js",
-    "start": "serve pages",
+    "start": "rm pages/index.html && serve pages",
     "format": "prettier ./pages/* README.md scripts/* --write"
   },
   "keywords": [

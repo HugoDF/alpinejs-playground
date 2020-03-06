@@ -15,10 +15,10 @@
   </head>
 
   <body class="flex flex-row">
-    <div x-data="page()" class="w-1/3 flex flex-col p-4" data-reflect-root>
+    <div class="w-1/3 flex flex-col p-4" data-reflect-root>
       <h2 class="text-lg font-md mb-16">Demo</h2>
       <div x-data="greet()">
-        <button @click="showMessage()">Greet Me</button>
+        <button @click="showMessage()" class="mb-8 justify-center flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Greet Me</button>
         <div>Message: <span x-text="messageDisplay"></span></div>
       </div>
       <script>
@@ -27,7 +27,7 @@
             message: "Hello Alpine.js",
             messageDisplay: "",
             showMessage() {
-              // implement me
+              this.messageDisplay = this.message;
             }
           };
         }

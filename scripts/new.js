@@ -10,4 +10,4 @@ const exampleContent = fs.readFileSync(
   `${pageDir}/example-template.html`,
   "utf8"
 );
-fs.writeFileSync(fileName, exampleContent, "utf8");
+fs.writeFileSync(`${pageDir}/${fileName}`, exampleContent, "utf8");

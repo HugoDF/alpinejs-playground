@@ -1,6 +1,6 @@
 # Alpine.js Playground
 
-Alpine.js examples not explictly covered in the core documentation.
+A set of ready to use Alpine.js examples with TailwindCSS.
 
 Find the examples in the [pages](./pages) directory.
 
@@ -20,6 +20,7 @@ Find the examples in the [pages](./pages) directory.
 
 - `yarn start` will start a local dev server using [serve](https://github.com/zeit/serve)
 - `yarn format` will run prettier on the HTML pages.
+- `yarn build` will generate an `index.html` from files in the `pages` directory
 
 ## LICENSE
 

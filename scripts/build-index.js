@@ -1,4 +1,5 @@
 const fs = require("fs").promises;
+const pkg = require('../package.json')
 
 const pagesDir = `${__dirname}/../pages`;
 const indexPath = `${pagesDir}/index.html`;
@@ -62,7 +63,7 @@ function template(pages) {
     >
       <h2 class="text-xl font-semibold text-gray-900 mb-8">Alpine.js Playground</h2>
       <div class="text-xs text-gray-500 italic mb-4">Last Updated: ${new Date().toLocaleString('en-GB')}</div>
-      <p class="mb-4">Ready to use Alpine.js examples by <a href="https://codewithhugo.com/tags/alpinejs">Hugo</a></p>
+      <p class="mb-4">${pkg.description} by <a href="https://codewithhugo.com/tags/alpinejs">Hugo</a></p>
       <ul class="list-inside">
         <template x-for="page in pages" :key="page.path">
           <li class="list-disc w-full">

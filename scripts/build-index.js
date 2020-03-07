@@ -58,7 +58,7 @@ function template(pages) {
   <body class="flex">
     <div
       x-data="page()"
-      class="flex mx-auto flex-col items-center px-32 py-24"
+      class="flex mx-auto flex-col items-center px-8 md:px-32 py-24"
     >
       <h2 class="text-xl font-semibold text-gray-900 mb-8">Alpine.js Playground</h2>
       <div class="text-xs text-gray-500 italic mb-4">Last Updated: ${new Date().toLocaleString('en-GB')}</div>

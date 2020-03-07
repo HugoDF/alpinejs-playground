@@ -46,11 +46,11 @@ function template(pages) {
     <meta description="Alpine.js Playground - Ready to use Alpine.js examples" />
     <title>Alpine.js Playground</title>
     <link
-      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@1.x.x/dist/tailwind.min.css"
       rel="stylesheet"
     />
     <script
-      src="https://unpkg.com/alpinejs@2.0.2/dist/alpine.js"
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.x.x/dist/alpine.min.js"
       defer
     ></script>
   </head>

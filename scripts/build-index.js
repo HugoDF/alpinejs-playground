@@ -25,7 +25,7 @@ async function main() {
           .replace("Alpine.js Playground - ", "")
           .trim()
           .replace(/\n/g, ""),
-        path: p
+        path: p.replace('.html', '')
       };
     })
   );
@@ -70,7 +70,7 @@ function template(pages) {
       )}</div>
       <p class="mb-4">${
         pkg.description
-      } by <a href="https://codewithhugo.com/tags/alpinejs">Hugo</a></p>
+      } by <a class="text-blue-500 hover:text-blue-800 hover:underline" href="https://codewithhugo.com/tags/alpinejs">Hugo</a></p>
       <ul class="list-inside">
         <template x-for="page in pages" :key="page.path">
           <li class="list-disc w-full">

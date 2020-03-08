@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Alpine.js Weekly - Alpine.js news and articles" />
+    <title>Alpine.js Weekly - Newsletter</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@1.x.x/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <!-- <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.1.1/dist/alpine.min.js"
+      defer
+    ></script> -->
+  </head>
+
+  <body class="flex flex-col">
+    <!-- x-data="page()" -->
+    <div class="flex mx-auto lg:w-2/3 flex-col px-8 md:px-32 py-24">
+      <h2 class="text-xl font-semibold w-full text-center text-gray-900 mb-8">
+        Alpine.js Weekly
+      </h2>
+
+      <p class="leading-relaxed mb-4">
+        <a
+          class="text-blue-500 hover:text-blue-800 hover:underline"
+          href="https://buttondown.email/alpinejs"
+        >
+          Alpine.js Weekly
+        </a> is blablabla
+      </p>
+
+      <p class="leading-relaxed mb-2">
+        Stay in the looooooop
+      </p>
+      <form
+        action="https://buttondown.email/api/emails/embed-subscribe/alpinejs"
+        method="post"
+        target="popupwindow"
+        onsubmit="window.open('https://buttondown.email/alpinejs', 'popupwindow')"
+        class="rounded pt-6 pb-8 mb-4 embeddable-buttondown-form"
+      >
+      <div class="flex flex-col">
+          <label class="flex text-gray-700" for="bd-email">Enter your email</label>
+          <input class="flex mb-2 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 appearance-none leading-normal" type="email" name="email" id="bd-email">
+          <input type="hidden" value="1" name="embed"></input>
+          <input class="flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit" value="Subscribe"></input>
+        </div>
+        <p>
+          <a href="https://buttondown.email" target="_blank">Powered by Buttondown.</a>
+        </p>
+      </form>
+
+      <p class="leading-relaxed mb-4">The newsletter goes out once a week.</p>
+
+      <p class="leading-relaxed mb-4">
+        Published by
+        <a
+          class="text-blue-500 hover:text-blue-800 hover:underline"
+          class="text-blue-500 hover:text-blue-800 hover:underline"
+          href="https://codewithhugo.com/tags/alpinejs"
+          >Hugo</a
+        >
+      </p>
+    </div>
+  </body>
+</html>

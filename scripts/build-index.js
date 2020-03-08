@@ -10,7 +10,7 @@ if (require.main === module) {
     process.exit(1);
   });
 }
-const hiddenPages = ['index', 'thank-you'];
+const hiddenPages = ["index", "thank-you"];
 async function main() {
   const pagePaths = (await fs.readdir(pagesDir)).filter(
     n => n.endsWith(".html") && !hiddenPages.some(p => n.startsWith(p))
@@ -25,7 +25,7 @@ async function main() {
           .replace("Alpine.js Playground - ", "")
           .trim()
           .replace(/\n/g, ""),
-        path: p.replace('.html', '')
+        path: p.replace(".html", "")
       };
     })
   );
@@ -47,7 +47,9 @@ function template(pages) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Alpine.js Playground - ${pkg.description}" />
+    <meta name="description" content="Alpine.js Playground - ${
+      pkg.description
+    }" />
     <title>Alpine.js Playground</title>
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@1.x.x/dist/tailwind.min.css"

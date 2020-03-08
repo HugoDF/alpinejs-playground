@@ -3,9 +3,12 @@ const fs = require("fs").promises;
 const critical = require("critical");
 
 const pagesDir = `${__dirname}/../pages`;
+const inlineable = ["thank-you.html"];
 
 async function main() {
-  const files = (await fs.readdir(pagesDir)).filter(f => f.endsWith(".html"));
+  const files = (await fs.readdir(pagesDir)).filter(
+    f => inlineable.includes(f) && f.endsWith(".html")
+  );
 
   let i = 0;
   const parallelism = 3;

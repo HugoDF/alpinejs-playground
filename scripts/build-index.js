@@ -11,7 +11,7 @@ function getCommit() {
   return process.env.REPOSITORY_URL && process.env.COMMIT_REF
     ? {
       url: `${process.env.REPOSITORY_URL}/commits/${process.env.COMMIT_REF}`,
-      text: process.env.COMMIT_REF
+      text: process.env.COMMIT_REF.slice(0, 6)
     }
     : {
       url: '',
@@ -77,7 +77,7 @@ function template(pages) {
     >
       <h2 class="text-xl font-semibold text-gray-900 mb-8">Alpine.js Playground</h2>
       <div class="text-xs text-gray-500 italic mb-4">Last update: <a
-        class="text-blue-500 hover:text-blue-800 hover:underline"
+        class="text-blue-300 hover:text-blue-600 hover:underline"
         href="${commit.url}"
       >${commit.text}</a>
       </div>

@@ -1,5 +1,5 @@
 const fs = require("fs").promises;
-const { pkg, pagesDir, indexPath } = require('./config')
+const { pkg, pagesDir, indexPath } = require("./config");
 
 if (require.main === module) {
   main().catch(err => {

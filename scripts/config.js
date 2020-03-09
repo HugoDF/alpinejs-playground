@@ -7,4 +7,4 @@ module.exports = {
   pagesDir,
   distDir,
   indexPath
-}
+};

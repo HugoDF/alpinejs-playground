@@ -10,13 +10,13 @@ if (require.main === module) {
 function getCommit() {
   return process.env.REPOSITORY_URL && process.env.COMMIT_REF
     ? {
-      url: `${process.env.REPOSITORY_URL}/commits/${process.env.COMMIT_REF}`,
-      text: process.env.COMMIT_REF.slice(0, 6)
-    }
+        url: `${process.env.REPOSITORY_URL}/commits/${process.env.COMMIT_REF}`,
+        text: process.env.COMMIT_REF.slice(0, 6)
+      }
     : {
-      url: '',
-      text: 'develop'
-    }
+        url: "",
+        text: "develop"
+      };
 }
 const hiddenPages = ["index", "thank-you"];
 async function main() {

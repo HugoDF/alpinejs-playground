@@ -4,21 +4,24 @@
   "version": "1.0.0",
   "description": "A set of ready to use Alpine.js examples with TailwindCSS",
   "scripts": {
-    "build": "rm -rf dist && mkdir -p dist && node scripts/build-index.js && cp pages/* dist && node scripts/inline-remote-css/cli.js",
-    "start": "serve pages",
+    "build": "rm -rf dist && eleventy && node scripts/inline-remote-css/cli.js",
+    "start": "eleventy --serve",
     "format": "prettier ./pages/* README.md scripts/* --write"
   },
   "keywords": [
     "alpinejs",
+    "eleventy",
+    "11ty",
     "tailwindcss"
   ],
   "author": "Hugo Di Francesco",
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
+    "@11ty/eleventy": "^0.10.0",
+    "glob": "^7.1.6",
     "node-fetch": "^2.6.0",
     "prettier": "^1.19.1",
-    "purgecss": "^2.1.0",
-    "serve": "^11.3.0"
+    "purgecss": "^2.1.0"
   }
 }

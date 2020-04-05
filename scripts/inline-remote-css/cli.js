@@ -2,26 +2,28 @@
 const fs = require("fs").promises;
 const { distDir } = require("../config");
 const inlineCss = require('./inline-css')
+let glob = require('glob');
+const { promisify } = require('util');
+glob = promisify(glob);
 
 /**
  * Inline CSS CLI
  */
 async function main() {
-  const files = (await fs.readdir(distDir)).filter(f => f.endsWith(".html"));
+  const paths = await glob(`${distDir}/**/*.html`);
   await Promise.all(
-    files.map(async f => {
+    paths.map(async path => {
       try {
-        console.time(f);
-        const filePath = `${distDir}/${f}`
+        console.time(path);
         // Read file
-        const initialHtml = await fs.readFile(filePath, "utf8");
+        const initialHtml = await fs.readFile(path, "utf8");
         // Run transform
         const newHtml = await inlineCss(initialHtml);
         // Write back to file
-        await fs.writeFile(filePath, newHtml, "utf8");
-        console.timeEnd(f);
+        await fs.writeFile(path, newHtml, "utf8");
+        console.timeEnd(path);
       } catch (err) {
-        console.error(`${f}: ${err.stack}`);
+        console.error(`${path}: ${err.stack}`);
       }
     })
   );

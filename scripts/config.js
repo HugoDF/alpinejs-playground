@@ -6,5 +6,5 @@ module.exports = {
   pkg,
   pagesDir,
   distDir,
-  indexPath
+  indexPath,
 };

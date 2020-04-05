@@ -1,6 +1,6 @@
-const fs = require('fs').promises;
+const fs = require("fs").promises;
 const fetch = require("node-fetch");
-const opts = require('./options')
+const opts = require("./options");
 
 /**
  * Load & cache (to fs) remote stylesheets
@@ -9,10 +9,7 @@ const opts = require('./options')
  * @param {boolean} options.noCache - Whether to use existing cache
  * @param {boolean} options.cachePath - Where to store the cache
  */
-async function loadRemoteStyleSheet(
-  url,
-  options = opts()
-) {
+async function loadRemoteStyleSheet(url, options = opts()) {
   const { noCache, cachePath } = options;
   const styleSheetCachePath = `${cachePath}/${Buffer.from(url).toString(
     "base64"
@@ -28,11 +25,11 @@ async function loadRemoteStyleSheet(
     }
   }
 
-  const css = await fetch(url).then(res => res.text());
+  const css = await fetch(url).then((res) => res.text());
   // Cache loaded resource
   await fs.writeFile(styleSheetCachePath, css, "utf8");
 
   return css;
 }
 
-module.exports = loadRemoteStyleSheet
+module.exports = loadRemoteStyleSheet;

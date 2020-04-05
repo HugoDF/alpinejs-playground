@@ -1,6 +1,6 @@
 function reflect() {
   const INDENT = "\n  ";
-  const ignore = el => {
+  const ignore = (el) => {
     return el.dataset.hasOwnProperty("reflectIgnore") || el.tagName === "BR";
   };
   return {
@@ -23,7 +23,7 @@ function reflect() {
       return this.wrap(
         el,
         [...el.children]
-          .map(el => this.recurse(el))
+          .map((el) => this.recurse(el))
           .filter(Boolean)
           .join(INDENT)
       );
@@ -42,8 +42,8 @@ function reflect() {
       return [
         `<${tagName}${attributes ? " " + attributes : ""}>`,
         content,
-        `</${tagName}>`
+        `</${tagName}>`,
       ].join(INDENT);
-    }
+    },
   };
 }

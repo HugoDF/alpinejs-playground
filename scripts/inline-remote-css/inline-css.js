@@ -1,6 +1,6 @@
 const PurgeCSS = require("purgecss").default;
-const opts = require('./options')
-const loadRemoteStyleSheet = require('./loadRemoteStyleSheet');
+const opts = require("./options");
+const loadRemoteStyleSheet = require("./loadRemoteStyleSheet");
 
 const styleLinkRegex = /<link[^>]*rel="stylesheet"[^>]*>/gm;
 const extractHrefRegex = /(?<=href=").*(?=")/gm;
@@ -18,30 +18,30 @@ async function inlineCss(html, options = opts()) {
 
   // 1.1 only if links are in the document
   if (!linkTags || linkTags.length === 0) {
-    console.warn('HTML did not contain any link tags')
-    return html
+    console.warn("HTML did not contain any link tags");
+    return html;
   }
 
   // @todo 1.2 only if there's a `href`, only if
-  const styleSheetUrls = linkTags.map(t => t.match(extractHrefRegex)[0]);
+  const styleSheetUrls = linkTags.map((t) => t.match(extractHrefRegex)[0]);
   // 2. Fetch styleSheet by url
   const styleSheetContents = await Promise.all(
-    styleSheetUrls.map(url => loadRemoteStyleSheet(url, options))
+    styleSheetUrls.map((url) => loadRemoteStyleSheet(url, options))
   );
   // @todo cache Purge output using `styleSheets.url` + HTML content
   // 3. inject as CSS contents in PurgeCSS config
   const purgeResult = await new PurgeCSS().purge({
-    defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || [],
+    defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
     content: [
       {
         raw: html,
-        extension: "html"
-      }
+        extension: "html",
+      },
     ],
-    css: styleSheetContents.map(css => ({
+    css: styleSheetContents.map((css) => ({
       raw: css,
-      extension: "css"
-    }))
+      extension: "css",
+    })),
   });
 
   // 4. create a "url" -> purgedCSS map
@@ -52,7 +52,7 @@ async function inlineCss(html, options = opts()) {
   }, {});
 
   // 5. replace <link> tags with correct CSS in <style> tags
-  return html.replace(styleLinkRegex, linkTag => {
+  return html.replace(styleLinkRegex, (linkTag) => {
     // 5.1. find relevant CSS based on linkTag.match(extractHrefRegex)
     // & url -> CSS map
     const [linkHref] = linkTag.match(extractHrefRegex);
@@ -61,4 +61,4 @@ async function inlineCss(html, options = opts()) {
   });
 }
 
-module.exports = inlineCss
+module.exports = inlineCss;

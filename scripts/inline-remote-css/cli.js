@@ -1,9 +1,9 @@
 // @ts-nocheck
 const fs = require("fs").promises;
 const { distDir } = require("../config");
-const inlineCss = require('./inline-css')
-let glob = require('glob');
-const { promisify } = require('util');
+const inlineCss = require("./inline-css");
+let glob = require("glob");
+const { promisify } = require("util");
 glob = promisify(glob);
 
 /**
@@ -12,7 +12,7 @@ glob = promisify(glob);
 async function main() {
   const paths = await glob(`${distDir}/**/*.html`);
   await Promise.all(
-    paths.map(async path => {
+    paths.map(async (path) => {
       try {
         console.time(path);
         // Read file
@@ -30,7 +30,7 @@ async function main() {
 }
 
 if (require.main === module) {
-  main().catch(err => {
+  main().catch((err) => {
     console.error(err.stack);
     process.exit(1);
   });

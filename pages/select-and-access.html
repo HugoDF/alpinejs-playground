@@ -1,6 +1,7 @@
 ---
 title: Bound "select" and access selection data example
 ---
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -65,16 +66,16 @@ title: Bound "select" and access selection data example
               options: [
                 {
                   value: "bacon",
-                  text: "Bacon"
+                  text: "Bacon",
                 },
                 {
                   value: "ham",
-                  text: "Ham"
-                }
+                  text: "Ham",
+                },
               ],
               access() {
                 this.$refs.output.innerText = this.selectedOption;
-              }
+              },
             };
           }
         </script>

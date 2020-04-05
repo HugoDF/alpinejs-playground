@@ -1,6 +1,7 @@
 ---
 title: "Data Fetch Example"
 ---
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -85,12 +86,12 @@ title: "Data Fetch Example"
               fetchPokemon() {
                 this.isLoading = true;
                 fetch(`https://pokeapi.co/api/v2/pokemon/${this.pokemonSearch}`)
-                  .then(res => res.json())
-                  .then(data => {
+                  .then((res) => res.json())
+                  .then((data) => {
                     this.isLoading = false;
                     this.pokemon = data;
                   });
-              }
+              },
             };
           }
         </script>

@@ -2,7 +2,7 @@ const fs = require("fs").promises;
 const { pkg, pagesDir, indexPath } = require("./config");
 
 if (require.main === module) {
-  main().catch(err => {
+  main().catch((err) => {
     console.error(err);
     process.exit(1);
   });
@@ -11,21 +11,21 @@ function getCommit() {
   return process.env.REPOSITORY_URL && process.env.COMMIT_REF
     ? {
         url: `${process.env.REPOSITORY_URL}/commits/${process.env.COMMIT_REF}`,
-        text: process.env.COMMIT_REF.slice(0, 6)
+        text: process.env.COMMIT_REF.slice(0, 6),
       }
     : {
         url: "",
-        text: "develop"
+        text: "develop",
       };
 }
 const hiddenPages = ["index", "thank-you"];
 async function main() {
   const pagePaths = (await fs.readdir(pagesDir)).filter(
-    n => n.endsWith(".html") && !hiddenPages.some(p => n.startsWith(p))
+    (n) => n.endsWith(".html") && !hiddenPages.some((p) => n.startsWith(p))
   );
 
   const pages = await Promise.all(
-    pagePaths.map(async p => {
+    pagePaths.map(async (p) => {
       const content = await fs.readFile(`${pagesDir}/${p}`, "utf8");
       const [title] = content.match(/(?<=<title>).*(?=<\/title>)/ims);
       return {
@@ -33,7 +33,7 @@ async function main() {
           .replace("Alpine.js Playground - ", "")
           .trim()
           .replace(/\n/g, ""),
-        path: p.replace(".html", "")
+        path: p.replace(".html", ""),
       };
     })
   );
@@ -41,7 +41,7 @@ async function main() {
   await fs.writeFile(indexPath, template(pages), "utf8");
 }
 
-const renderPagesToJSObj = pages =>
+const renderPagesToJSObj = (pages) =>
   pages
     .map(
       ({ title, path }) =>

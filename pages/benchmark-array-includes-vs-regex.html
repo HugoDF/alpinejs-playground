@@ -2,6 +2,7 @@
 title: "Benchmark Array#includes vs RegExp literal &
 instance"
 ---
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -102,7 +103,7 @@ instance"
               "required",
               "reversed",
               "selected",
-              "typemustmatch"
+              "typemustmatch",
             ];
             const regex = new RegExp(array.join("|"));
             const literalRegex = /allowfullscreen|allowpaymentrequest|async|autofocus|autoplay|checked|controls|default|defer|disabled|formnovalidate|hidden|ismap|itemscope|loop|multiple|muted|nomodule|novalidate|open|readonly|required|reversed|selected|typemustmatch/;
@@ -112,22 +113,22 @@ instance"
 
             const suite = new Benchmark.Suite();
             suite
-              .add("RegExpInstance#test - match", function() {
+              .add("RegExpInstance#test - match", function () {
                 regex.test(match);
               })
-              .add("Array#includes - match", function() {
+              .add("Array#includes - match", function () {
                 array.includes(match);
               })
-              .add("RegExpLiteral#test - match", function() {
+              .add("RegExpLiteral#test - match", function () {
                 literalRegex.test(match);
               })
-              .add("RegExpInstance#test - no match", function() {
+              .add("RegExpInstance#test - no match", function () {
                 regex.test(noMatch);
               })
-              .add("Array#includes - no match", function() {
+              .add("Array#includes - no match", function () {
                 array.includes(noMatch);
               })
-              .add("RegExpInstance#test - no match", function() {
+              .add("RegExpInstance#test - no match", function () {
                 literalRegex.test(noMatch);
               });
 
@@ -136,7 +137,7 @@ instance"
               message: "",
               output: [],
               suite,
-              tests: suite.map(t => t.name),
+              tests: suite.map((t) => t.name),
               run() {
                 // cache Alpine instance under $vm (Vue.js instance).
                 const $vm = this;
@@ -146,17 +147,17 @@ instance"
                 // set to "running"
                 this.isRunning = true;
                 this.suite
-                  .on("cycle", function(event) {
+                  .on("cycle", function (event) {
                     $vm.output = [...$vm.output, String(event.target)];
                   })
-                  .on("complete", function() {
+                  .on("complete", function () {
                     $vm.message = `Fastest is ${this.filter("fastest").map(
                       "name"
                     )}\nSlowest is ${this.filter("slowest").map("name")}`;
                     $vm.isRunning = false;
                   })
                   .run({ async: true });
-              }
+              },
             };
           }
         </script>

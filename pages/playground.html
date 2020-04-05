@@ -1,6 +1,7 @@
 ---
-title: "\"reflect\" function example"
+title: '"reflect" function example'
 ---
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -52,7 +53,7 @@ title: "\"reflect\" function example"
       <script>
         function reflect() {
           const INDENT = "\n  ";
-          const ignore = el => {
+          const ignore = (el) => {
             return (
               el.dataset.hasOwnProperty("reflectIgnore") || el.tagName === "BR"
             );
@@ -77,7 +78,7 @@ title: "\"reflect\" function example"
               return this.wrap(
                 el,
                 [...el.children]
-                  .map(el => this.recurse(el))
+                  .map((el) => this.recurse(el))
                   .filter(Boolean)
                   .join(INDENT)
               );
@@ -96,9 +97,9 @@ title: "\"reflect\" function example"
               return [
                 `<${tagName}${attributes ? " " + attributes : ""}>`,
                 content,
-                `</${tagName}>`
+                `</${tagName}>`,
               ].join(INDENT);
-            }
+            },
           };
         }
       </script>

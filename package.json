@@ -16,6 +16,7 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
+    "@11ty/eleventy": "^0.10.0",
     "node-fetch": "^2.6.0",
     "prettier": "^1.19.1",
     "purgecss": "^2.1.0",

@@ -4,10 +4,10 @@ module.exports = function() {
       "md",
       "njk",
       "html",
-      "liquid",
+      // "liquid",
       "js"
     ],
-    markdownTemplateEngine: "liquid",
+    // markdownTemplateEngine: "liquid",
     htmlTemplateEngine: "njk",
     dataTemplateEngine: "njk",
     dir: {

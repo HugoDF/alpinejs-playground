@@ -22,6 +22,6 @@
     "glob": "^7.1.6",
     "node-fetch": "^2.6.0",
     "prettier": "^2.0.4",
-    "purgecss": "^2.1.0"
+    "purgecss": "^2.1.2"
   }
 }

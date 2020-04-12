@@ -96,13 +96,20 @@ eleventyExcludeFromCollections: true
       </form>
     </div>
     <script>
+      // dump a bunch of data on the page
       window.__collections = {
         examples: [
           {% for page in collections.all %}
           { url: {{ page.url | dump | safe }}, title: {{ page.data.title | dump | safe }} },
           {% endfor %}
         ],
-        components: {{ components | dump | safe }}
+        components: {{ components | dump | safe }},
+        articles: {{ articles | dump | safe }},
+        // tweets: @todo
+        demos: {{ demos | dump | safe }},
+        sites: {{ builtWith | dump | safe }},
+        podcasts: {{ podcasts | dump | safe }},
+        tools: {{ tools | dump | safe }}
       };
     </script>
     <script>

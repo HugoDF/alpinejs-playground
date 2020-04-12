@@ -1,12 +1,16 @@
 ---
 eleventyExcludeFromCollections: true
 ---
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Alpine.js Playground - {{ pkg.description }}" />
+    <meta
+      name="description"
+      content="Alpine.js Playground - {{ pkg.description }}"
+    />
     <title>Alpine.js Playground</title>
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@1.x.x/dist/tailwind.min.css"
@@ -19,31 +23,49 @@ eleventyExcludeFromCollections: true
   </head>
 
   <body class="flex">
-    <div x-data="page()" x-init="init()" class="flex mx-auto flex-col items-center px-8 md:px-32 py-24">
-      <h2 class="text-xl font-semibold text-gray-900 mb-8">Alpine.js Playground</h2>
-      <div class="text-xs text-gray-500 italic mb-4">Last update: <a
-        class="text-blue-300 hover:text-blue-600 hover:underline"
-        href="{{ commit.url }}"
-      >{{ commit.text }}</a>
+    <div
+      x-data="page()"
+      x-init="init()"
+      class="flex mx-auto flex-col items-center px-8 md:px-32 py-24"
+    >
+      <h2 class="text-xl font-semibold text-gray-900 mb-8">
+        Alpine.js Playground
+      </h2>
+      <div class="text-xs text-gray-500 italic mb-4">
+        Last update:
+        <a
+          class="text-blue-300 hover:text-blue-600 hover:underline"
+          href="{{ commit.url }}"
+          >{{ commit.text }}</a
+        >
       </div>
       <p class="mb-4">
-        A set of <span x-text="pre()">ready to use Alpine.js</span> <select
+        A set of <span x-text="pre()">ready to use Alpine.js</span>
+        <select
           class="inline-block appearance-none bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
-          x-model="selectedType">
+          x-model="selectedType"
+        >
           <template x-for="option in options" :key="option">
             <option :value="option" x-text="option"></option>
           </template>
           <option x-remove value="examples" selected>examples</option>
-        </select> <span x-text="post()">with TailwindCSS</span> by <a class="text-blue-500 hover:text-blue-800 hover:underline" href="https://codewithhugo.com/tags/alpinejs">Hugo</a>
+        </select>
+        <span x-text="post()">with TailwindCSS</span> by
+        <a
+          class="text-blue-500 hover:text-blue-800 hover:underline"
+          href="https://codewithhugo.com/tags/alpinejs"
+          >Hugo</a
+        >
       </p>
       <ul class="list-inside mb-8 flex flex-col w-full md:w-3/4 mx-auto">
         {% for page in collections.all %}
-          <li class="list-disc w-full" x-remove>
-            <a
-              class="text-blue-500 hover:text-blue-800 hover:underline"
-              href="{{ page.url }}"
-            >{{ page.data.title }}</a>
-          </li>
+        <li class="list-disc w-full" x-remove>
+          <a
+            class="text-blue-500 hover:text-blue-800 hover:underline"
+            href="{{ page.url }}"
+            >{{ page.data.title }}</a
+          >
+        </li>
         {% endfor %}
         <template x-for="item in collections[selectedType]">
           <li class="list-disc w-full">
@@ -54,7 +76,8 @@ eleventyExcludeFromCollections: true
             ></a>
             <template x-if="item.by && item.by.url">
               <span>
-                by <a
+                by
+                <a
                   class="text-blue-500 hover:text-blue-800 hover:underline"
                   :href="item.by.url"
                   x-text="item.by.name || item.by.url"
@@ -78,7 +101,9 @@ eleventyExcludeFromCollections: true
         >
           Subscribe to Alpine.js Weekly
         </label>
-        <p class="leading-relaxed flex text-sm mb-4">A free, once–weekly email roundup of Alpine.js news and articles.</p>
+        <p class="leading-relaxed flex text-sm mb-4">
+          A free, once–weekly email roundup of Alpine.js news and articles.
+        </p>
         <input
           placeholder="calebporzio@alpinejs.org"
           class="flex mb-2 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 appearance-none leading-normal"
@@ -115,63 +140,66 @@ eleventyExcludeFromCollections: true
 
     <script>
       function page() {
-        const selectedType = new URLSearchParams(window.location.search).get('type') || 'examples';
+        const selectedType =
+          new URLSearchParams(window.location.search).get("type") || "examples";
         return {
           // this.selectedType starts off empty
           // until we've removed pre-rendered content
           // (ones with [x-remove] attr)
           // and let Alpine render the select out
-          selectedType: '',
+          selectedType: "",
           init() {
-            this.$el.querySelectorAll('[x-remove]').forEach(el => el.remove())
+            this.$el
+              .querySelectorAll("[x-remove]")
+              .forEach((el) => el.remove());
             this.$nextTick(() => {
               // fixes rendering bug, see comment about
               // this.selectedType
-              this.selectedType = selectedType
-            })
+              this.selectedType = selectedType;
+            });
             let prevType = selectedType;
-            this.$watch('selectedType', (value) => {
+            this.$watch("selectedType", (value) => {
               // only sync to URL on change...
               if (prevType !== value) {
-                const url = new URL(window.location.href)
-                url.searchParams.set('type', value)
-                history.pushState(null, document.title, url.toString())
+                const url = new URL(window.location.href);
+                url.searchParams.set("type", value);
+                history.pushState(null, document.title, url.toString());
               }
-            })
+            });
           },
           options: Object.keys(window.__collections),
           collections: window.__collections,
           pre() {
-            switch(this.selectedType) {
-              case 'examples':
-                return 'ready to use Alpine.js'
-              case 'sites':
-              case 'tools':
-                return 'relevant'
+            switch (this.selectedType) {
+              case "examples":
+                return "ready to use Alpine.js";
+              case "sites":
+              case "tools":
+                return "relevant";
               default:
-                return 'Alpine.js'
+                return "Alpine.js";
             }
           },
           post() {
-            switch(this.selectedType) {
-              case 'examples':
-                return 'with TailwindCSS'
-              case 'components':
-                return 'ready to copy-paste'
-              case 'articles':
-              case 'demos':
-                return 'for your perusal'
-              case 'sites':
-                return 'built with Alpine.js'
-              case 'podcasts':
-                return '🎧 for your commute'
-              case 'tools':
-                return 'to supercharge your Alpine.js dev'
+            switch (this.selectedType) {
+              case "examples":
+                return "with TailwindCSS";
+              case "components":
+                return "ready to copy-paste";
+              case "articles":
+              case "demos":
+                return "for your perusal";
+              case "sites":
+                return "built with Alpine.js";
+              case "podcasts":
+                return "🎧 for your commute";
+              case "tools":
+                return "to supercharge your Alpine.js dev";
               default:
-                return ''
+                return "";
             }
-          }
-        }
+          },
+        };
       }
     </script>
   </body>

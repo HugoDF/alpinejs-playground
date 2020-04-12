@@ -1,0 +1,7 @@
+- title: Hello
+  url: world
+  author:
+    name: Hugo
+    url: https://twitter.com
+- title: World
+  url: bar

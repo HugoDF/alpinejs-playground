@@ -129,6 +129,15 @@ eleventyExcludeFromCollections: true
               // this.selectedType
               this.selectedType = selectedType
             })
+            let prevType = selectedType;
+            this.$watch('selectedType', (value) => {
+              // only sync to URL on change...
+              if (prevType !== value) {
+                const url = new URL(window.location.href)
+                url.searchParams.set('type', value)
+                history.pushState(null, document.title, url.toString())
+              }
+            })
           },
           options: Object.keys(window.__collections),
           collections: window.__collections,

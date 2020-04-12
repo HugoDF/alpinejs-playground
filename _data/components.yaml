@@ -1,0 +1,88 @@
+- title: A popup menu
+  url: https://codepen.io/brbcoding-the-selector/pen/ExjBxjw
+  by:
+    name: "@brbcoding"
+    url: https://twitter.com/brbcoding
+  reference: https://twitter.com/brbcoding/status/1246463686472015873
+- title: Pagination component with Tailwind
+  url: https://codepen.io/abhisheksarmah/pen/eYNwgdv
+  by:
+    name: "@theasarmah"
+    url: https://twitter.com/theasarmah/status/1246775689283395584
+  tags: [tailwind]
+- title: "A listing comparison drawer with tabs and slide animation"
+  url: https://codepen.io/jreviews/pen/RwWbrJN
+  by:
+    name: "@getJReviews"
+    url: https://twitter.com/getJReviews
+  reference: https://twitter.com/getJReviews/status/1247624310455443459
+- title: Tag search input
+  url: https://codepen.io/atomgiant/pen/QWjWgKz
+  by:
+    name: "@atomgiant"
+    url: https://twitter.com/atomgiant
+- title: Character Counter
+  url: https://jsfiddle.net/alexjustesen/97va6d1h/)
+  # equivalent in jQuery: https://jsfiddle.net/alexjustesen/4ant7cm6/
+  by:
+    name: "@alexjustesen"
+    url: https://twitter.com/alexjustesen/status/1248286627467755520
+# Issue 5
+- title: An Alpine.js GDPR banner demo
+  url: https://twitter.com/lepikhinb/status/1245465757993050115
+  by:
+    name: "@lepikhinb"
+    url: https://twitter.com/lepikhinb
+- title: A multistep form with Alpine & Tailwind
+  url: https://codepen.io/mithicher/pen/wvabGoN
+  tags: [tailwind]
+  by:
+    name: "@mithicher"
+    url: https://twitter.com/mithicher
+- title: A newsletter subscribe form with Alpine & Tailwind
+  url: https://codepen.io/abhisheksarmah/pen/QWbzqZO
+  by:
+    name: "@theasarmah"
+    url: https://twitter.com/theasarmah
+# Issue 4
+- title:  Newsletter Form with TailwindCSS, AlpineJS and Sheety
+  url: https://codepen.io/mithicher/pen/jOPpaGq
+  tags: [tailwind]
+  by:
+    name: "@mithicher"
+    url: https://twitter.com/mithicher
+- title: Dashboard Layout with TailwindCSS and Alpine.js
+  url: https://codepen.io/mithicher/pen/oNXPwdy
+  tags: [tailwind]
+  by:
+    name: "@mithicher"
+    url: https://twitter.com/mithicher
+- title: Invoice Generator build with TailwindCSS and Alpine.js
+  url: https://codepen.io/mithicher/pen/XWbxEaK
+  tags: [tailwind]
+  by:
+    name: "@mithicher"
+    url: https://twitter.com/mithicher
+- title: Registration form with reactive validation
+  url: https://codepen.io/framansi/pen/XWbPPZB
+  by:
+    name: "@framansi"
+    url: https://twitter.com/framansi
+# Issue 3
+- title: Login Show/Hide Password
+  url: https://codepen.io/framansi/pen/oNXEmdm
+  tags: [tailwind]
+  by:
+    name: "@framansi"
+    url: https://twitter.com/framansi
+- title: Edit in place text input
+  tags: [tailwind]
+  url: https://codepen.io/brbcoding-the-selector/pen/yLNvexO
+  by:
+    name: "@brbcoding"
+    url: https://twitter.com/brbcoding
+- title: Auto-updating copyright component
+  url: https://twitter.com/Kotfire/status/1237383167167913985
+  by:
+    name: "@Kotfire"
+    url: https://twitter.com/Kotfire

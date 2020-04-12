@@ -1,0 +1,23 @@
+# Issue 7
+- title: Alpine.js Devtools (repository)
+  url: https://github.com/Te7a-Houdini/alpinejs-devtools
+- title: Alpine.js Devtools (Chrome Extension)
+  url: https://chrome.google.com/webstore/detail/alpinejs-devtools/fopaemeedckajflibkpifppcankfmbhk
+# Issue 6
+- title: Alpine.js Discord
+  url: https://discord.gg/snmCYk3
+  by:
+    name: "@PiotrPogorzel"
+    url: https://twitter.com/PiotrPogorzel
+# Issue 5
+- title: Iodine - a micro client-side validation library inspired by Alpine.js
+  url: https://github.com/mattkingshott/iodine
+  by:
+    name: "@mattkingshott"
+    url: https://twitter.com/mattkingshott
+# Issue 1
+- title: Alpine Livewire Plugin (archived)
+  url: https://github.com/livewire/alpine-plugin
+  by:
+    name: Twitter
+    url: https://twitter.com

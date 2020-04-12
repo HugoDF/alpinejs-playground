@@ -1,0 +1,72 @@
+# Issue 6
+- title: Le framework AlpineJS
+  url: https://pixenjoy.com/notes/le-framework-alpinejs/
+  tags: [fr]
+# Issue 5
+- title: Combine Phoenix LiveView with Alpine.js
+  url: https://fullstackphoenix.com/tutorials/combine-phoenix-liveview-with-alpine-js
+- title: "Alpine.js: responsive x-cloak"
+  url: https://dev.to/hus_hmd/alpine-js-responsive-x-cloak-3blp
+  by:
+    name: "@hus_hmd"
+    url: https://twitter.com/hus_hmd
+- title: Alpine.js Tutorial
+  url: https://morioh.com/p/4f100e4659fe
+- title: What is Alpine.js
+  url: https://ryangjchandler.co.uk/articles/what-is-alpine-js/
+  by:
+    name: "@ryangjchandler"
+    url: https://twitter.com/ryangjchandler
+- title: "IodineJS — a micro validation library inspired by Alpine.js"
+  url: https://itnext.io/iodinejs-a-micro-validation-library-705ba388586f
+  by:
+    name: "@mattkingshott"
+    url: https://twitter.com/mattkingshott
+# Issue 4
+- title: Build an edit in place component with Livewire & Alpine.js.
+  url: https://chasingcode.dev/blog/edit-in-place-component-livewire-alpinejs/
+  by:
+    name: "@brbcoding"
+    url: https://twitter.com/brbcoding
+- title: Tailwind UI, Tailwind CSS, AlpineJS & Inter Typeface for Ruby on Rails
+  url: https://medium.com/@davidteren/production-ready-tailwind-ui-tailwind-css-alpinejs-inter-typeface-for-ruby-on-rails-part-1-46f24daf1b26
+  by:
+    name: "@regardingaudio"
+    url: https://twitter.com/regardingaudio
+# Issue 3
+- title: "Introducing Alpine.js: A Minimal JavaScript Framework "
+  url: https://www.classicinformatics.com/blog/introducing-alpine.js-a-minimal-javascript-framework
+  by:
+    name: classicinformatics.com
+    url: https://classicinformatics.com
+- title: "Adding Notifications to Laravel.io with Livewire, Alpine.js and Tailwind UI"
+  url: https://joedixon.co.uk/adding-notifications-to-laravelio
+  by:
+    name: Joe Dixon
+    url: https://twitter.com/_joedixon
+- title: A comparison of a simple app in Vue.js and Alpine.js
+  url: https://medium.com/@wearethreebears/a-comparison-of-a-simple-app-in-vue-js-and-alpine-js-2a8c57f8b0e3
+  by:
+    name: Liam Hall
+- title: Transition-ing from Alpine.js to Vue.js
+  url: https://erichjames.com/2020/03/transition-ing-from-alpine-js-to-vue-js/
+  by:
+    name: erich
+    url: https://erichjames.com/author/erich/
+# Issue 1
+- title: "Introducing Alpine.js: A Tiny JavaScript Framework."
+  url: https://www.smashingmagazine.com/2020/03/introduction-alpinejs-javascript-framework/
+  by:
+    name: Phil Smith
+
+- title: "Using Alpine.js components in React"
+  url: https://codewithhugo.com/alpine-js-react/
+  by:
+    name: Hugo
+    url: https://codewithhugo.com
+
+- title: "Practical Alpine.js: x-data data access & data fetching examples"
+  url: https://codewithhugo.com/alpinejs-x-data-fetching/
+  by:
+    name: Hugo
+    url: https://codewithhugo.com

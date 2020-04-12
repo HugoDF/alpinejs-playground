@@ -1,3 +1,4 @@
+# Issue 6
 - title: A popup menu
   url: https://codepen.io/brbcoding-the-selector/pen/ExjBxjw
   by:
@@ -10,12 +11,23 @@
     name: "@theasarmah"
     url: https://twitter.com/theasarmah/status/1246775689283395584
   tags: [tailwind]
+- title: Twitter Clone UI
+  url: https://codepen.io/mithicher/pen/JjdgYdy
+  by:
+    name: "@mithicher"
+    url: https://twitter.com/mithicher
+  reference: https://twitter.com/mithicher/status/1247184872226975745
 - title: "A listing comparison drawer with tabs and slide animation"
   url: https://codepen.io/jreviews/pen/RwWbrJN
   by:
     name: "@getJReviews"
     url: https://twitter.com/getJReviews
   reference: https://twitter.com/getJReviews/status/1247624310455443459
+- title: Yo-Yo's visualisation
+  url: https://codepen.io/unlikenesses/full/WNQemBN
+  by:
+    name: "@unlikenesses"
+    url: https://twitter.com/unlikenesses/status/1247973929819439104
 - title: Tag search input
   url: https://codepen.io/atomgiant/pen/QWjWgKz
   by:
@@ -33,6 +45,11 @@
   by:
     name: "@lepikhinb"
     url: https://twitter.com/lepikhinb
+- title: A cool slider
+  url: https://twitter.com/marcelpociot/status/1244729072476983297
+  by:
+    name: "@marcelpociot"
+    url: https://twitter.com/marcelpociot
 - title: A multistep form with Alpine & Tailwind
   url: https://codepen.io/mithicher/pen/wvabGoN
   tags: [tailwind]
@@ -45,6 +62,11 @@
     name: "@theasarmah"
     url: https://twitter.com/theasarmah
 # Issue 4
+- title: "An implementation in Alpine.js of a Washington Post simulation by @Harry_Stevens"
+  url: https://codepen.io/unlikenesses/details/NWqLPNb
+  by:
+    name: "@unlikenesses"
+    url: https://twitter.com/unlikenesses
 - title:  Newsletter Form with TailwindCSS, AlpineJS and Sheety
   url: https://codepen.io/mithicher/pen/jOPpaGq
   tags: [tailwind]
@@ -86,3 +108,8 @@
   by:
     name: "@Kotfire"
     url: https://twitter.com/Kotfire
+- title: AlpineJS Screaming Balls
+  url: https://codepen.io/unlikenesses/pen/VwLQwEp
+  by:
+    name: "@unlikenesses"
+    url: https://twitter.com/unlikenesses

@@ -36,8 +36,7 @@ eleventyExcludeFromCollections: true
           <option x-remove value="examples" selected>examples</option>
         </select> <span x-text="post()">with TailwindCSS</span> by <a class="text-blue-500 hover:text-blue-800 hover:underline" href="https://codewithhugo.com/tags/alpinejs">Hugo</a>
       </p>
-
-      <ul class="list-inside mb-8">
+      <ul class="list-inside mb-8 flex flex-col w-full md:w-3/4 mx-auto">
         {% for page in collections.all %}
           <li class="list-disc w-full" x-remove>
             <a

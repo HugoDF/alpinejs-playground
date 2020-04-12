@@ -19,7 +19,7 @@ eleventyExcludeFromCollections: true
   </head>
 
   <body class="flex">
-    <div class="flex mx-auto flex-col items-center px-8 md:px-32 py-24">
+    <div x-data="page()" x-init="init()" class="flex mx-auto flex-col items-center px-8 md:px-32 py-24">
       <h2 class="text-xl font-semibold text-gray-900 mb-8">Alpine.js Playground</h2>
       <div class="text-xs text-gray-500 italic mb-4">Last update: <a
         class="text-blue-300 hover:text-blue-600 hover:underline"
@@ -78,5 +78,36 @@ eleventyExcludeFromCollections: true
         />
       </form>
     </div>
+    <script>
+      window.__collections = {
+        examples: [
+          {% for page in collections.all %}
+          { url: {{ page.url | dump | safe }}, title: {{ page.data.title | dump | safe }} },
+          {% endfor %}
+        ],
+        components: {{ components | dump | safe }}
+      };
+    </script>
+    <script>
+
+      function page() {
+        const search = new URLSearchParams(window.location.search).get('type') || 'examples';
+        return {
+          selectedType: search,
+          options: Object.keys(window.__collections),
+          collections: window.__collections,
+          extra() {
+            switch(this.selectedType) {
+              case 'examples':
+              default:
+                return 'with TailwindCSS'
+            }
+          },
+          init() {
+            this.$el.querySelectorAll('[x-remove]').forEach(el => el.remove())
+          }
+        }
+      }
+    </script>
   </body>
 </html>

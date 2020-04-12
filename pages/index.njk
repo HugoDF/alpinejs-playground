@@ -39,13 +39,22 @@ eleventyExcludeFromCollections: true
 
       <ul class="list-inside mb-8">
         {% for page in collections.all %}
-          <li class="list-disc w-full">
+          <li class="list-disc w-full" x-remove>
             <a
               class="text-blue-500 hover:text-blue-800 hover:underline"
               href="{{ page.url }}"
             >{{ page.data.title }}</a>
           </li>
         {% endfor %}
+        <template x-for="item in collections[selectedType]">
+          <li class="list-disc w-full">
+            <a
+              class="text-blue-500 hover:text-blue-800 hover:underline"
+              :href="item.url"
+              x-text="item.title"
+            ></a>
+          </li>
+        </template>
       </ul>
 
       <form

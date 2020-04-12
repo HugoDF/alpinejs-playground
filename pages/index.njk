@@ -12,6 +12,10 @@ eleventyExcludeFromCollections: true
       href="https://cdn.jsdelivr.net/npm/tailwindcss@1.x.x/dist/tailwind.min.css"
       rel="stylesheet"
     />
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.x.x/dist/alpine.min.js"
+      defer
+    ></script>
   </head>
 
   <body class="flex">
@@ -23,7 +27,16 @@ eleventyExcludeFromCollections: true
       >{{ commit.text }}</a>
       </div>
       <p class="mb-4">
-        {{ pkg.description }} by <a class="text-blue-500 hover:text-blue-800 hover:underline" href="https://codewithhugo.com/tags/alpinejs">Hugo</a></p>
+        A set of ready to use Alpine.js <select
+          class="inline-block appearance-none bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+          x-model="selectedType">
+          <template x-for="option in options" :key="option">
+            <option :value="option" x-text="option"></option>
+          </template>
+          <option x-remove value="examples" selected>examples</option>
+        </select> <span x-text="extra()">with TailwindCSS</span> by <a class="text-blue-500 hover:text-blue-800 hover:underline" href="https://codewithhugo.com/tags/alpinejs">Hugo</a>
+      </p>
+
       <ul class="list-inside mb-8">
         {% for page in collections.all %}
           <li class="list-disc w-full">

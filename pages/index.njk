@@ -112,12 +112,24 @@ eleventyExcludeFromCollections: true
         tools: {{ tools | dump | safe }}
       };
     </script>
-    <script>
 
+    <script>
       function page() {
-        const search = new URLSearchParams(window.location.search).get('type') || 'examples';
+        const selectedType = new URLSearchParams(window.location.search).get('type') || 'examples';
         return {
-          selectedType: search,
+          // this.selectedType starts off empty
+          // until we've removed pre-rendered content
+          // (ones with [x-remove] attr)
+          // and let Alpine render the select out
+          selectedType: '',
+          init() {
+            this.$el.querySelectorAll('[x-remove]').forEach(el => el.remove())
+            this.$nextTick(() => {
+              // fixes rendering bug, see comment about
+              // this.selectedType
+              this.selectedType = selectedType
+            })
+          },
           options: Object.keys(window.__collections),
           collections: window.__collections,
           pre() {
@@ -149,9 +161,6 @@ eleventyExcludeFromCollections: true
               default:
                 return ''
             }
-          },
-          init() {
-            this.$el.querySelectorAll('[x-remove]').forEach(el => el.remove())
           }
         }
       }

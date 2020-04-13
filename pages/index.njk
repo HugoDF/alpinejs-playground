@@ -165,6 +165,7 @@ eleventyExcludeFromCollections: true
                 const url = new URL(window.location.href);
                 url.searchParams.set("type", value);
                 history.pushState(null, document.title, url.toString());
+                prevType = value;
               }
             });
           },

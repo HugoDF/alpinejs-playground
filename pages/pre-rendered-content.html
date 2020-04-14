@@ -1,0 +1,199 @@
+---
+title: "Integrating Alpine.js + Pre/Server-rendered content"
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Alpine.js Playground - Integrating Alpine.js + Pre/Server-rendered content
+    </title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@1.x.x/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.x.x/dist/alpine.min.js"
+      defer
+    ></script>
+  </head>
+
+  <body class="flex flex-col">
+    <header
+      class="flex w-full px-10 py-2 border border-b border-solid border-gray-600"
+    >
+      <a href="/" class="text-xl font-semibold text-gray-900">
+        Alpine.js Playground
+      </a>
+    </header>
+    <div class="flex flex-col md:flex-row">
+      <div class="md:w-1/2 flex flex-col p-10" data-reflect-root>
+        <div
+          class="py-4 mb-4"
+          x-data="{ options: ['hello', 'world'], selected: 'world' }"
+        >
+          <h3 id="x-show" class="text-xl font-semibold text-gray-900 mb-4">
+            Hiding pre-rendered content with x-show
+          </h3>
+          <p>
+            <span x-show="true">pre-rendered content that won't be hidden</span>
+          </p>
+          <p class="mb-2">
+            the content in "<span x-show="false">pre-rendered to be hidden</span
+            >" will get hidden
+          </p>
+          <p class="mb-2">
+            the content in "<span x-show="0">pre-rendered to be hidden</span>"
+            will get hidden
+          </p>
+          <p class="mb-2">
+            Example with a select that doesn't quite work, we end up with 2
+            "hello" options, one is selected & hidden and the other is visible
+            and unselected:
+          </p>
+          <select x-model="selected">
+            <template x-for="o in options" :key="o">
+              <option :value="o" x-text="o"></option>
+            </template>
+            <option x-show="false" value="hello" selected>hello</option>
+          </select>
+        </div>
+        <div
+          class="mb-4"
+          x-data="{ text: 'alpine-render', html: '<button>btn from alpine</button>' }"
+          x-init="setTimeout(() => {
+            text = 'alpine-render-2';
+            html = '<button>alpine-render-2</button>';
+          }, 1000);
+          "
+        >
+          <h3
+            id="x-html-x-text"
+            class="text-xl font-semibold text-gray-900 mb-4"
+          >
+            Overwriting HTML/text with x-html/x-text
+          </h3>
+          <span x-text="text">pre-rendered text</span>
+          <div x-html="html">
+            <h3>Pre-rendered HTML</h3>
+          </div>
+        </div>
+        <div
+          class="mb-4"
+          x-data="{ options: ['hello', 'world'], selected: 'world' }"
+          x-init="
+            $refs.remove1.remove();
+            $refs.remove2.remove();
+            $refs.remove3.remove();
+          "
+        >
+          <h3
+            id="x-refs-remove"
+            class="text-xl font-semibold text-gray-900 mb-4"
+          >
+            Removing single nodes using x-ref + x-init
+          </h3>
+          <p class="mb-2">
+            The following text will get removed with x-ref approach "<span
+              x-ref="remove1"
+              >pre-rendered content</span
+            >"
+          </p>
+          <p class="mb-2">
+            As will the following text: "<span x-ref="remove2"
+              >pre-rendered content</span
+            >"
+          </p>
+          <p class="mb-2">
+            A more sensible example with the "select" that works... mostly
+            ("world" should be selected)
+          </p>
+          <select x-model="selected">
+            <template x-for="o in options" :key="o">
+              <option :value="o" x-text="o"></option>
+            </template>
+            <option x-ref="remove3" value="hello" selected>hello</option>
+          </select>
+        </div>
+        <div
+          class="mb-4"
+          x-data="{ options: ['hello', 'world'], selected: 'world' }"
+          x-init="
+            $el.querySelectorAll('[x-remove]')
+              .forEach(e => e.remove());
+          "
+        >
+          <h3 id="x-remove" class="text-xl font-semibold text-gray-900 mb-4">
+            Removing nodes using x-remove + x-init
+          </h3>
+          <p class="mb-2">
+            The following text will get removed with x-ref approach "<span
+              x-remove
+              >pre-rendered content</span
+            >"
+          </p>
+          <p class="mb-2">
+            As will the following text: "<span x-remove
+              >pre-rendered content</span
+            >"
+          </p>
+          <p class="mb-2">
+            A more sensible example with the "select" that works... mostly
+            ("world" should be selected)
+          </p>
+          <select x-model="selected">
+            <template x-for="o in options" :key="o">
+              <option :value="o" x-text="o"></option>
+            </template>
+            <option x-remove value="hello" selected>hello</option>
+          </select>
+        </div>
+        <div
+          class="mb-4"
+          x-data="{ options: ['hello', 'world'], selected: '' }"
+          x-init="
+            $el.querySelectorAll('[x-remove]')
+              .forEach(e => e.remove());
+            $nextTick(() => {
+              selected = options[1];
+            })
+          "
+        >
+          <h3 id="next-tick-set" class="text-xl font-semibold text-gray-900 mb-4">
+            Fixing selection issue using $nextTick
+          </h3>
+          <p class="mb-2">
+            A more sensible example with the "select" that works (including
+            selection)
+          </p>
+          <select x-model="selected">
+            <template x-for="o in options" :key="o">
+              <option :value="o" x-text="o"></option>
+            </template>
+            <option x-remove value="hello" selected>hello</option>
+          </select>
+        </div>
+      </div>
+      <div
+        x-data="reflect()"
+        data-reflect-ignore
+        class="md:w-1/2 flex flex-col p-10"
+      >
+        <div
+          class="flex flex-row items-center mb-8 pb-4 border-b border-solid border-gray-300"
+        >
+          <h3 class="text-xl font-semibold text-gray-900">Code</h3>
+          <button
+            @click="toggleShowClass()"
+            class="flex ml-4 md:ml-16 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            x-text="showClass ? 'Hide classes' : 'Show classes'"
+          ></button>
+        </div>
+        <pre><code class="w-full inline-block overflow-scroll text-xs" x-text="content()"></code></pre>
+        <script src="/reflect.js"></script>
+      </div>
+    </div>
+  </body>
+</html>

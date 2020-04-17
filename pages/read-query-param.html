@@ -34,23 +34,30 @@ title: "Read Query Parameter Demo"
         class="md:w-1/3 flex flex-col p-10"
         data-reflect-root
       >
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Read Query Parameter Demo</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">
+          Read Query Parameter Demo
+        </h3>
         <p class="mb-2">
           location.search: "<span x-text="location.search"></span>"
         </p>
+        <p class="mb-2">Param "q" (from URL): "<span x-text="query"></span>"</p>
         <p class="mb-2">
-          Param "q" (from URL): "<span x-text="query"></span>"
-        </p>
-        <p class="mb-2">Some sample links with "q" in the URL: <a
-          class="text-blue-500 hover:text-blue-800 hover:underline"
-          href="?q=my search"
-        >my search</a>, <a
-          class="text-blue-500 hover:text-blue-800 hover:underline"
-          href="?q=another search"
-        >another search</a>, <a
-          class="text-blue-500 hover:text-blue-800 hover:underline"
-          href="?q="
-        >reset</a>
+          Some sample links with "q" in the URL:
+          <a
+            class="text-blue-500 hover:text-blue-800 hover:underline"
+            href="?q=my search"
+            >my search</a
+          >,
+          <a
+            class="text-blue-500 hover:text-blue-800 hover:underline"
+            href="?q=another search"
+            >another search</a
+          >,
+          <a
+            class="text-blue-500 hover:text-blue-800 hover:underline"
+            href="?q="
+            >reset</a
+          >
         </p>
       </div>
 

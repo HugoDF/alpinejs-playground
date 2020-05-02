@@ -3,6 +3,8 @@
   url: https://github.com/Te7a-Houdini/alpinejs-devtools
 - title: Alpine.js Devtools (Chrome Extension)
   url: https://chrome.google.com/webstore/detail/alpinejs-devtools/fopaemeedckajflibkpifppcankfmbhk
+- title: Alpine.js Devtools (Firefox Add-on)
+  url: https://addons.mozilla.org/firefox/addon/alpinejs-devtools/
 # Issue 6
 - title: Alpine.js Discord
   url: https://discord.gg/snmCYk3

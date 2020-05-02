@@ -1,3 +1,16 @@
+# Issue 8
+- title: ourbible.study
+  url: https://ourbible.study/
+  by:
+    name: "@jchristopher"
+    url: https://twitter.com/jchristopher
+  referene: https://twitter.com/jchristopher/status/1251213412002119682
+- title: "@baselinehq"
+  url: https://twitter.com/baselinehq
+  reference: https://twitter.com/nonken/status/1251182886532890624
+  by:
+    name: "@nonken"
+    url: https://twitter.com/nonken/status/1251182886532890624
 # Issue 6
 - title: invoicegenerator.now.sh
   url: https://invoicegenerator.now.sh/

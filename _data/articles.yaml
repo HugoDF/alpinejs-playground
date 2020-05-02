@@ -1,3 +1,30 @@
+# Issue 8
+- title: Building a Likes addon in Statamic 3
+  url: https://duncanm.dev/building-a-likes-addon-in-statamic-3
+  by:
+    name: Duncan McClean
+    url: https://duncanm.dev
+
+- title: Anonymous Alpine Components
+  url: https://ryangjchandler.co.uk/articles/anonymous-alpine-components
+  by:
+    name: "@ryangjchandler"
+    url: https://twitter.com/ryangjchandler
+- title: An Alternative Approach to Computed Properties in Alpine.js
+  url: https://ryangjchandler.co.uk/articles/an-alternative-approach-to-computed-properties-in-alpinejs
+  by:
+    name: "@ryangjchandler"
+    url: https://twitter.com/ryangjchandler
+- title: Integrating Alpine.js + Pre/Server-rendered content
+  url: https://codewithhugo.com/alpine-server-pre-render-x-remove/
+  by:
+    name: "@hugo__df"
+    url: https://twitter.com/hugo__df
+- title: "Laravel Lessons: Views & Layouts"
+  url: http://stephenjude.me/articles/laravel-lessons-layouts-views
+  by:
+    name: "@stephenjudeso"
+    url: https://twitter.com/stephenjudeso
 # Issue 6
 - title: Le framework AlpineJS
   url: https://pixenjoy.com/notes/le-framework-alpinejs/

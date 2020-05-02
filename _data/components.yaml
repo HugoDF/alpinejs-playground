@@ -1,3 +1,23 @@
+# Issue 8
+- title: Table UI with TailwindCSS & AlpineJS
+  url: https://codepen.io/mithicher/full/OJyRjvb
+  by:
+    name: "@mithicher"
+    url: https://twitter.com/mithicher
+  reference: https://twitter.com/mithicher/status/1252250946819821569
+- title: Tabs on Food - an Alpine.js demo
+  url: https://codepen.io/j_greig/pen/abvBQZZ
+  by:
+    name: "@j_greig"
+    url: https://twitter.com/j_greig
+  reference: https://twitter.com/j_greig/status/1252923532939530240
+- title: Alpine JS + TailwindCSS Responsive Navigation Bar
+  url: https://codepen.io/muzafferdede/pen/MWaJKgj
+  by:
+    name: "@MuzafferDede"
+    url: https://twitter.com/MuzafferDede
+  reference: https://twitter.com/MuzafferDede/status/1253042188293820416
+# Pre Issue 8
 - title: A popup menu
   url: https://codepen.io/brbcoding-the-selector/pen/ExjBxjw
   by:

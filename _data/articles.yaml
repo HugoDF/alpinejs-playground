@@ -1,3 +1,48 @@
+# Issue 9
+- title: "Synchronize x-data and the URL in Alpine.js with the location/History APIs and $watch"
+  url: https://codewithhugo.com/alpinejs-x-data-watch-url/
+  by:
+    name: "@hugo__df"
+    url: https://twitter.com/hugo__df
+- title: "\"Sprinkles\" showdown: Alpinejs vs Stimulusjs"
+  url: https://minimul.com/lets/watch/W8RrkW1ooGY
+  by:
+    name: "@minimulx"
+    url: https://twitter.com/minimulx
+  reference: https://twitter.com/minimulx/status/1255893622970617857
+- title: "Alpine.js: The JavaScript Framework That’s Used Like jQuery, Written Like Vue, and Inspired by TailwindCSS"
+  url: https://css-tricks.com/alpine-js-the-javascript-framework-thats-used-like-jquery-written-like-vue-and-inspired-by-tailwindcss/
+  by:
+    name: "@hugo__df"
+    url: https://twitter.com/hugo__df
+  reference: https://twitter.com/hugo__df/status/1255512704137166853
+# Issue 8
+- title: Building a Likes addon in Statamic 3
+  url: https://duncanm.dev/building-a-likes-addon-in-statamic-3
+  by:
+    name: Duncan McClean
+    url: https://duncanm.dev
+
+- title: Anonymous Alpine Components
+  url: https://ryangjchandler.co.uk/articles/anonymous-alpine-components
+  by:
+    name: "@ryangjchandler"
+    url: https://twitter.com/ryangjchandler
+- title: An Alternative Approach to Computed Properties in Alpine.js
+  url: https://ryangjchandler.co.uk/articles/an-alternative-approach-to-computed-properties-in-alpinejs
+  by:
+    name: "@ryangjchandler"
+    url: https://twitter.com/ryangjchandler
+- title: Integrating Alpine.js + Pre/Server-rendered content
+  url: https://codewithhugo.com/alpine-server-pre-render-x-remove/
+  by:
+    name: "@hugo__df"
+    url: https://twitter.com/hugo__df
+- title: "Laravel Lessons: Views & Layouts"
+  url: http://stephenjude.me/articles/laravel-lessons-layouts-views
+  by:
+    name: "@stephenjudeso"
+    url: https://twitter.com/stephenjudeso
 # Issue 6
 - title: Le framework AlpineJS
   url: https://pixenjoy.com/notes/le-framework-alpinejs/

@@ -1,3 +1,57 @@
+# Issue 9
+- title: "[Tip]: if your content is flashing don't forget your x-cloak CSS"
+  url: https://twitter.com/brbcoding/status/1222944134387859456
+  by:
+    name: "@brbcoding"
+    url: https://twitter.com/brbcoding
+- title: "[Tip]: for PHPStorm users: add Alpine directives as custom HTML attributes"
+  url: https://twitter.com/anu/status/1254104828411854857
+  by:
+    name: "@anu"
+    url: https://twitter.com/anu
+- title: Count characters typed
+  url: https://codepen.io/xewl/pen/vYNJxLg
+  by:
+    name: "@Xewl"
+    url: https://twitter.com/Xewl
+  reference: https://twitter.com/Xewl/status/1255863205362118658
+# Issue 8
+- title: Add dynamic form fields using AlpineJS
+  url: https://codepen.io/sanjayojha/pen/qBONdVm
+  by:
+    name: "@sanjayojha"
+    url: https://twitter.com/sanjayojha
+  reference: https://twitter.com/sanjayojha/status/1251175972218433537
+- title: Table UI with TailwindCSS & AlpineJS
+  url: https://codepen.io/mithicher/full/OJyRjvb
+  by:
+    name: "@mithicher"
+    url: https://twitter.com/mithicher
+  reference: https://twitter.com/mithicher/status/1252250946819821569
+- title: Tabs on Food - an Alpine.js demo
+  url: https://codepen.io/j_greig/pen/abvBQZZ
+  by:
+    name: "@j_greig"
+    url: https://twitter.com/j_greig
+  reference: https://twitter.com/j_greig/status/1252923532939530240
+
+- title: Everything-in-HTML
+  url: https://codepen.io/simonswiss/pen/MWabxyg
+  by:
+    name: "@simonswiss"
+    url: https://twitter.com/simonswiss
+  reference: https://twitter.com/simonswiss/status/1252925458414366723
+- title: Alpine JS + TailwindCSS Responsive Navigation Bar
+  url: https://codepen.io/muzafferdede/pen/MWaJKgj
+  by:
+    name: "@MuzafferDede"
+    url: https://twitter.com/MuzafferDede
+  reference: https://twitter.com/MuzafferDede/status/1253042188293820416
+- title: Simple cross-component communication with events in Alpine
+  url: https://twitter.com/FeldAryeh/status/1253198276536479744
+  by:
+    name: "@FeldAryeh"
+    url: https://twitter.com/FeldAryeh
 # Issue 6
 - title: A popup menu
   url: https://codepen.io/brbcoding-the-selector/pen/ExjBxjw

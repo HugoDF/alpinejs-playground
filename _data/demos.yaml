@@ -1,3 +1,20 @@
+# Issue 9
+- title: "[Tip]: if your content is flashing don't forget your x-cloak CSS"
+  url: https://twitter.com/brbcoding/status/1222944134387859456
+  by:
+    name: "@brbcoding"
+    url: https://twitter.com/brbcoding
+- title: "[Tip]: for PHPStorm users: add Alpine directives as custom HTML attributes"
+  url: https://twitter.com/anu/status/1254104828411854857
+  by:
+    name: "@anu"
+    url: https://twitter.com/anu
+- title: Count characters typed
+  url: https://codepen.io/xewl/pen/vYNJxLg
+  by:
+    name: "@Xewl"
+    url: https://twitter.com/Xewl
+  reference: https://twitter.com/Xewl/status/1255863205362118658
 # Issue 8
 - title: Add dynamic form fields using AlpineJS
   url: https://codepen.io/sanjayojha/pen/qBONdVm

@@ -1,3 +1,21 @@
+# Issue 9
+- title: "Synchronize x-data and the URL in Alpine.js with the location/History APIs and $watch"
+  url: https://codewithhugo.com/alpinejs-x-data-watch-url/
+  by:
+    name: "@hugo__df"
+    url: https://twitter.com/hugo__df
+- title: "\"Sprinkles\" showdown: Alpinejs vs Stimulusjs"
+  url: https://minimul.com/lets/watch/W8RrkW1ooGY
+  by:
+    name: "@minimulx"
+    url: https://twitter.com/minimulx
+  reference: https://twitter.com/minimulx/status/1255893622970617857
+- title: "Alpine.js: The JavaScript Framework That’s Used Like jQuery, Written Like Vue, and Inspired by TailwindCSS"
+  url: https://css-tricks.com/alpine-js-the-javascript-framework-thats-used-like-jquery-written-like-vue-and-inspired-by-tailwindcss/
+  by:
+    name: "@hugo__df"
+    url: https://twitter.com/hugo__df
+  reference: https://twitter.com/hugo__df/status/1255512704137166853
 # Issue 8
 - title: Building a Likes addon in Statamic 3
   url: https://duncanm.dev/building-a-likes-addon-in-statamic-3

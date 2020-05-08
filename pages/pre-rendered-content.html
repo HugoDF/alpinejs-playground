@@ -55,7 +55,7 @@ title: "Integrating Alpine.js + Pre/Server-rendered content"
           </p>
           <select x-model="selected">
             <template x-for="o in options" :key="o">
-              <option :value="o" x-text="o"></option>
+              <option :value="o" x-text="o" :selected="o === selected"></option>
             </template>
             <option x-show="false" value="hello" selected>hello</option>
           </select>
@@ -112,7 +112,7 @@ title: "Integrating Alpine.js + Pre/Server-rendered content"
           </p>
           <select x-model="selected">
             <template x-for="o in options" :key="o">
-              <option :value="o" x-text="o"></option>
+              <option :value="o" x-text="o" :selected="o === selected"></option>
             </template>
             <option x-ref="remove3" value="hello" selected>hello</option>
           </select>
@@ -145,35 +145,7 @@ title: "Integrating Alpine.js + Pre/Server-rendered content"
           </p>
           <select x-model="selected">
             <template x-for="o in options" :key="o">
-              <option :value="o" x-text="o"></option>
-            </template>
-            <option x-remove value="hello" selected>hello</option>
-          </select>
-        </div>
-        <div
-          class="mb-4"
-          x-data="{ options: ['hello', 'world'], selected: '' }"
-          x-init="
-            $el.querySelectorAll('[x-remove]')
-              .forEach(e => e.remove());
-            $nextTick(() => {
-              selected = options[1];
-            })
-          "
-        >
-          <h3
-            id="next-tick-set"
-            class="text-xl font-semibold text-gray-900 mb-4"
-          >
-            Fixing selection issue using $nextTick
-          </h3>
-          <p class="mb-2">
-            A more sensible example with the "select" that works (including
-            selection)
-          </p>
-          <select x-model="selected">
-            <template x-for="o in options" :key="o">
-              <option :value="o" x-text="o"></option>
+              <option :value="o" x-text="o" :selected="o === selected"></option>
             </template>
             <option x-remove value="hello" selected>hello</option>
           </select>

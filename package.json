@@ -18,7 +18,7 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "@11ty/eleventy": "^0.10.0",
+    "@11ty/eleventy": "^0.11.0",
     "buttondown": "^1.1.1",
     "glob": "^7.1.6",
     "js-yaml": "^3.13.1",

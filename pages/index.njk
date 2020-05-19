@@ -46,7 +46,11 @@ eleventyExcludeFromCollections: true
           x-model="selectedType"
         >
           <template x-for="option in options" :key="option">
-            <option :value="option" x-text="option" :selected="option === selectedType"></option>
+            <option
+              :value="option"
+              x-text="option"
+              :selected="option === selectedType"
+            ></option>
           </template>
           <option x-remove value="examples" selected>examples</option>
         </select>

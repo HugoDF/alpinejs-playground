@@ -1,0 +1,117 @@
+---
+title: "Template"
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alpine.js Playground - Template</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@1.x.x/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.x.x/dist/alpine.min.js"
+      defer
+    ></script>
+  </head>
+
+  <body class="flex flex-col">
+    <header
+      class="flex w-full px-10 py-2 border border-b border-solid border-gray-600"
+    >
+      <a href="/" class="text-xl font-semibold text-gray-900">
+        Alpine.js Playground
+      </a>
+    </header>
+    <div class="flex flex-col md:flex-row">
+      <div
+        x-data="{ normalisedData: { 1: { text: 'todo 1'}, 2: { text: 'todo 2'} } }"
+        class="md:w-1/3 flex flex-col p-10"
+        data-reflect-root
+      >
+        <div>
+          <strong>x-data state:</strong>
+          <pre><code x-text="JSON.stringify({ normalisedData }, null, 2)"></code></pre>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold text-gray-900" id="ids-only">
+            Only need the ids - use <code>Object.keys</code>
+          </h3>
+          <ul>
+            <template x-for="id in Object.keys(normalisedData)" :key="id">
+              <li>id: <span x-text="id"></span></li>
+            </template>
+          </ul>
+        </div>
+        <div>
+          <h3
+            class="text-xl font-semibold text-gray-900"
+            id="ids-content-entries"
+          >
+            Need ids and text - use <code>Object.entries</code>
+          </h3>
+          <select>
+            <template
+              x-for="[id, value] in Object.entries(normalisedData)"
+              :key="id"
+            >
+              <option :value="id" x-text="value.text"></option>
+            </template>
+          </select>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold text-gray-900" id="ids-content-keys">
+            Need ids and text - use <code>Object.keys</code> + lookup
+          </h3>
+          <select>
+            <template x-for="id in Object.keys(normalisedData)" :key="id">
+              <option :value="id" x-text="normalisedData[id].text"></option>
+            </template>
+          </select>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold text-gray-900" id="content-values">
+            Need text - use <code>Object.values</code>
+          </h3>
+          <ul>
+            <template x-for="todo in Object.values(normalisedData)" :key="todo">
+              <li x-text="todo.text"></li>
+            </template>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold text-gray-900" id="content-keys">
+            Need text - use <code>Object.keys</code> + lookup
+          </h3>
+          <ul>
+            <template x-for="id in Object.keys(normalisedData)" :key="id">
+              <li x-text="normalisedData[id].text"></li>
+            </template>
+          </ul>
+        </div>
+      </div>
+
+      <div
+        x-data="reflect()"
+        data-reflect-ignore
+        class="md:w-2/3 flex flex-col p-10"
+      >
+        <div
+          class="flex flex-row items-center mb-8 pb-4 border-b border-solid border-gray-300"
+        >
+          <h3 class="text-xl font-semibold text-gray-900">Code</h3>
+          <button
+            @click="toggleShowClass()"
+            class="flex ml-4 md:ml-16 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            x-text="showClass ? 'Hide classes' : 'Show classes'"
+          ></button>
+        </div>
+        <pre><code class="w-full inline-block overflow-scroll" x-text="content()"></code></pre>
+        <script src="/reflect.js"></script>
+      </div>
+    </div>
+  </body>
+</html>

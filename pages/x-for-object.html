@@ -1,0 +1,152 @@
+---
+title: "x-for with objects"
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alpine.js Playground - x-for with objects</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@1.x.x/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.x.x/dist/alpine.min.js"
+      defer
+    ></script>
+  </head>
+
+  <body class="flex flex-col">
+    <header
+      class="flex w-full px-10 py-2 border border-b border-solid border-gray-600"
+    >
+      <a href="/" class="text-xl font-semibold text-gray-900">
+        Alpine.js Playground
+      </a>
+    </header>
+    <div class="flex flex-col md:flex-row">
+      <div
+        x-data="{
+          todos: {
+            1: {
+              id: 1,
+              text: 'todo-1'
+            },
+            2: {
+              id: 2,
+              text: 'todo-2'
+            }
+          },
+          sections: Array.from(document.querySelectorAll('h3[id]')).map(e => ({ id: e.id, text: e.innerText }))
+        }"
+        class="md:w-1/2 flex flex-col p-10"
+        data-reflect-root
+      >
+        <div data-reflect-ignore class="leading-tight mb-4">
+          <strong class="block">Table of contents</strong>
+          <ul class="list-inside pt-2 mb-4">
+            <template x-for="section in sections" :key="section.id">
+              <li class="list-disc w-full">
+                <a
+                  class="text-blue-500 hover:text-blue-800 hover:underline"
+                  :href="`#${section.id}`"
+                  x-text="section.text"
+                ></a>
+              </li>
+            </template>
+          </ul>
+          <p>
+            Get early access to the explanation post (out in a month) by
+            purchasing
+            <a
+              class="text-blue-500 hover:text-blue-800 hover:underline"
+              href="/handbook"
+              >Alpine.js Knowledge Base Membership</a
+            >
+          </p>
+          <!-- <p>
+            See the full post on <a class="text-blue-500 hover:text-blue-800 hover:underline" href="https://codewithhugo.com/">@todo</a>
+          </p> -->
+        </div>
+        <div>
+          <strong>x-data state:</strong>
+          <pre><code x-text="JSON.stringify({ todos }, null, 2)"></code></pre>
+        </div>
+        <div class="mb-8">
+          <h3 class="text-xl font-semibold text-gray-900" id="ids-only">
+            Only need the keys/ids - use <code>Object.keys</code>
+          </h3>
+          <ul>
+            <template x-for="id in Object.keys(todos)" :key="id">
+              <li>id: <span x-text="id"></span></li>
+            </template>
+          </ul>
+        </div>
+        <div class="mb-8">
+          <h3
+            class="text-xl font-semibold text-gray-900"
+            id="ids-content-entries"
+          >
+            Need keys/ids and values - use <code>Object.entries</code>
+          </h3>
+          <select>
+            <template x-for="[id, value] in Object.entries(todos)" :key="id">
+              <option :value="id" x-text="value.text"></option>
+            </template>
+          </select>
+        </div>
+        <div class="mb-8">
+          <h3 class="text-xl font-semibold text-gray-900" id="ids-content-keys">
+            Need keys/ids and values - use <code>Object.keys</code> + lookup
+          </h3>
+          <select>
+            <template x-for="id in Object.keys(todos)" :key="id">
+              <option :value="id" x-text="todos[id].text"></option>
+            </template>
+          </select>
+        </div>
+        <div class="mb-8">
+          <h3 class="text-xl font-semibold text-gray-900" id="content-values">
+            Need only values - use <code>Object.values</code>
+          </h3>
+          <ul>
+            <template x-for="todo in Object.values(todos)" :key="todo">
+              <li x-text="todo.text"></li>
+            </template>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold text-gray-900" id="content-keys">
+            Need values - use <code>Object.keys</code> + lookup
+          </h3>
+          <ul>
+            <template x-for="id in Object.keys(todos)" :key="id">
+              <li x-text="todos[id].text"></li>
+            </template>
+          </ul>
+        </div>
+      </div>
+
+      <div
+        x-data="reflect()"
+        data-reflect-ignore
+        class="md:w-1/2 flex flex-col p-10"
+      >
+        <div
+          class="flex flex-row items-center mb-8 pb-4 border-b border-solid border-gray-300"
+        >
+          <h3 class="text-xl font-semibold text-gray-900">Code</h3>
+          <button
+            @click="toggleShowClass()"
+            class="flex ml-4 md:ml-16 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            x-text="showClass ? 'Hide classes' : 'Show classes'"
+          ></button>
+        </div>
+        <pre><code class="w-full inline-block overflow-scroll" x-text="content()"></code></pre>
+        <script src="/reflect.js"></script>
+      </div>
+    </div>
+  </body>
+</html>

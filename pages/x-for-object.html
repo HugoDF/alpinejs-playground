@@ -38,11 +38,26 @@ title: "x-for with objects"
               id: 2,
               text: 'todo-2'
             }
-          }
+          },
+          sections: Array.from(document.querySelectorAll('h3[id]')).map(e => ({ id: e.id, text: e.innerText }))
         }"
         class="md:w-1/2 flex flex-col p-10"
         data-reflect-root
       >
+        <div data-reflect-ignore class="leading-tight mb-4">
+          <strong class="block">Table of contents</strong>
+          <ul class="list-inside pt-2">
+            <template x-for="section in sections" :key="section.id">
+              <li class="list-disc w-full">
+                <a
+                  class="text-blue-500 hover:text-blue-800 hover:underline"
+                  :href="`#${section.id}`"
+                  x-text="section.text"
+                ></a>
+              </li>
+            </template>
+          </ul>
+        </div>
         <div>
           <strong>x-data state:</strong>
           <pre><code x-text="JSON.stringify({ todos }, null, 2)"></code></pre>

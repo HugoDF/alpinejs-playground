@@ -36,7 +36,7 @@ title: "x-for with objects"
             },
             2: {
               id: 2,
-              text: 'todo-1'
+              text: 'todo-2'
             }
           }
         }"
@@ -47,7 +47,7 @@ title: "x-for with objects"
           <strong>x-data state:</strong>
           <pre><code x-text="JSON.stringify({ todos }, null, 2)"></code></pre>
         </div>
-        <div>
+        <div class="mb-8">
           <h3 class="text-xl font-semibold text-gray-900" id="ids-only">
             Only need the keys/ids - use <code>Object.keys</code>
           </h3>
@@ -57,7 +57,7 @@ title: "x-for with objects"
             </template>
           </ul>
         </div>
-        <div>
+        <div class="mb-8">
           <h3
             class="text-xl font-semibold text-gray-900"
             id="ids-content-entries"
@@ -70,7 +70,7 @@ title: "x-for with objects"
             </template>
           </select>
         </div>
-        <div>
+        <div class="mb-8">
           <h3 class="text-xl font-semibold text-gray-900" id="ids-content-keys">
             Need keys/ids and values - use <code>Object.keys</code> + lookup
           </h3>
@@ -80,7 +80,7 @@ title: "x-for with objects"
             </template>
           </select>
         </div>
-        <div>
+        <div class="mb-8">
           <h3 class="text-xl font-semibold text-gray-900" id="content-values">
             Need only values - use <code>Object.values</code>
           </h3>

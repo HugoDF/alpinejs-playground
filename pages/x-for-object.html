@@ -28,20 +28,31 @@ title: "x-for with objects"
     </header>
     <div class="flex flex-col md:flex-row">
       <div
-        x-data="{ normalisedData: { 1: { text: 'todo 1'}, 2: { text: 'todo 2'} } }"
+        x-data="{
+          todos: {
+            1: {
+              id: 1,
+              text: 'todo-1'
+            },
+            2: {
+              id: 2,
+              text: 'todo-1'
+            }
+          }
+        }"
         class="md:w-1/2 flex flex-col p-10"
         data-reflect-root
       >
         <div>
           <strong>x-data state:</strong>
-          <pre><code x-text="JSON.stringify({ normalisedData }, null, 2)"></code></pre>
+          <pre><code x-text="JSON.stringify({ todos }, null, 2)"></code></pre>
         </div>
         <div>
           <h3 class="text-xl font-semibold text-gray-900" id="ids-only">
-            Only need the ids - use <code>Object.keys</code>
+            Only need the keys/ids - use <code>Object.keys</code>
           </h3>
           <ul>
-            <template x-for="id in Object.keys(normalisedData)" :key="id">
+            <template x-for="id in Object.keys(todos)" :key="id">
               <li>id: <span x-text="id"></span></li>
             </template>
           </ul>
@@ -51,44 +62,41 @@ title: "x-for with objects"
             class="text-xl font-semibold text-gray-900"
             id="ids-content-entries"
           >
-            Need ids and text - use <code>Object.entries</code>
+            Need keys/ids and values - use <code>Object.entries</code>
           </h3>
           <select>
-            <template
-              x-for="[id, value] in Object.entries(normalisedData)"
-              :key="id"
-            >
+            <template x-for="[id, value] in Object.entries(todos)" :key="id">
               <option :value="id" x-text="value.text"></option>
             </template>
           </select>
         </div>
         <div>
           <h3 class="text-xl font-semibold text-gray-900" id="ids-content-keys">
-            Need ids and text - use <code>Object.keys</code> + lookup
+            Need keys/ids and values - use <code>Object.keys</code> + lookup
           </h3>
           <select>
-            <template x-for="id in Object.keys(normalisedData)" :key="id">
-              <option :value="id" x-text="normalisedData[id].text"></option>
+            <template x-for="id in Object.keys(todos)" :key="id">
+              <option :value="id" x-text="todos[id].text"></option>
             </template>
           </select>
         </div>
         <div>
           <h3 class="text-xl font-semibold text-gray-900" id="content-values">
-            Need text - use <code>Object.values</code>
+            Need only values - use <code>Object.values</code>
           </h3>
           <ul>
-            <template x-for="todo in Object.values(normalisedData)" :key="todo">
+            <template x-for="todo in Object.values(todos)" :key="todo">
               <li x-text="todo.text"></li>
             </template>
           </ul>
         </div>
         <div>
           <h3 class="text-xl font-semibold text-gray-900" id="content-keys">
-            Need text - use <code>Object.keys</code> + lookup
+            Need values - use <code>Object.keys</code> + lookup
           </h3>
           <ul>
-            <template x-for="id in Object.keys(normalisedData)" :key="id">
-              <li x-text="normalisedData[id].text"></li>
+            <template x-for="id in Object.keys(todos)" :key="id">
+              <li x-text="todos[id].text"></li>
             </template>
           </ul>
         </div>

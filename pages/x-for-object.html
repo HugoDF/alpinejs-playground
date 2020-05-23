@@ -39,8 +39,12 @@ title: "x-for with objects"
               text: 'todo-2'
             }
           },
-          sections: Array.from(document.querySelectorAll('h3[id]')).map(e => ({ id: e.id, text: e.innerText }))
+          sections: Array.from(document.querySelectorAll('h3[id]')).map(e => ({ id: e.id, text: e.innerText })),
+          heading: location.hash
         }"
+        x-init="heading && window.scrollTo({
+          top: $el.querySelector(heading).offsetTop
+        })"
         class="md:w-1/2 flex flex-col p-10"
         data-reflect-root
       >

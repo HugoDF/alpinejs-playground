@@ -22,7 +22,7 @@
     "@11ty/eleventy": "^0.11.0",
     "buttondown": "^1.1.1",
     "glob": "^7.1.6",
-    "inline-remote-assets": "^0.0.3",
+    "inline-remote-assets": "^0.4.0",
     "js-yaml": "^3.14.0",
     "node-fetch": "^2.6.0",
     "prettier": "^2.0.5",

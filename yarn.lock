@@ -1663,10 +1663,10 @@ ini@^1.3.4:
   resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.5.tgz#eee25f56db1c9ec6085e0c22778083f596abf927"
   integrity sha512-RZY5huIKCMRWDUqZlEi72f/lmXKMvuszcMBduliQ3nnWbx9X/ZBQO7DijMEYS9EhHBb2qacRUMtC7svLwe0lcw==
 
-inline-remote-assets@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/inline-remote-assets/-/inline-remote-assets-0.0.3.tgz#eb1168603b6f7f2ff9f52469fc3f9ace49760ea0"
-  integrity sha512-HRa6eF3ObteuRXbR57+drciL9tpkGrFEAveBMEGLCK/ZcW0GUYMw/dQVpePh1dxdQs7eRB7DCVJXfN5lEsnUUw==
+inline-remote-assets@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/inline-remote-assets/-/inline-remote-assets-0.4.0.tgz#41ab3b3deb1c88e09361adb4a5ae0151289f07fa"
+  integrity sha512-v0xeWTKjWSJ2fvxcOBfnG3XDg2zSjkwi+BSHanyxMEJXDhXfTMuUsNEulcxgI2RsDxrsUCL49YX6bKKaC5an/w==
   dependencies:
     meow "^7.0.1"
     node-fetch "^2.6.0"

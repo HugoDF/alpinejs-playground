@@ -29,18 +29,21 @@
 
   <body class="flex min-h-screen flex-col">
     <header
-      class="flex flex-row justify-between items-center w-full p-4 border border-b border-solid border-gray-600"
+      class="flex flex-row justify-between items-center w-full p-4 border"
     >
-      <a href="/" class="flex text-xl font-semibold text-gray-900">
+      <a
+        href="/"
+        class="flex text-xl font-semibold text-gray-900 hover:underline"
+      >
         Alpine.js Playground
       </a>
       <div class="flex flex-row">
-        <a class="flex px-2" href="/">Examples</a>
-        <a class="flex px-2" href="/newsletter">Newsletter</a>
+        <a class="flex px-2 hover:underline" href="/">Examples</a>
+        <a class="flex px-2 hover:underline" href="/newsletter">Newsletter</a>
       </div>
     </header>
     <div
-      x-data="previewHandler()"
+      x-data="preview()"
       x-init="setup"
       class="flex flex-col relative w-full h-full mx-auto shadow"
     >
@@ -48,7 +51,7 @@
         class="flex flex-row justify-between bg-gray-500 px-4 py-2 leading-none"
       >
         <h2 class="flex items-center text-white font-extrabold">
-          Code Preview Demo
+          {{ title }}
         </h2>
         <menu x-cloak class="flex divide-x-2 divide-gray-600">
           <button
@@ -72,7 +75,7 @@
           </button>
         </menu>
       </header>
-      <div class="flex h-full md:flex-row relative">
+      <div class="flex h-full flex-col md:flex-row relative">
         <span
           class="italic text-sm absolute bottom-0 right-0 mr-2 mb-2 z-10"
           x-show.transition.opacity.duration.350ms="copied"
@@ -88,16 +91,19 @@
           {{ content | safe }}
         </div>
         <div
-          x-ref="source"
-          class="relative flex min-h-full w-full md:w-1/2 items-center justify-center bg-gray-300"
+          class="flex min-h-full w-full md:w-1/2 items-center justify-center bg-gray-300"
           style="min-height: 500px;"
-        ></div>
+        >
+          <pre
+            x-ref="snippet"
+            class="min-h-full w-full inset-0 overflow-scroll bg-gray-200 font-mono p-4 pt-8"
+          ></pre>
+        </div>
       </div>
     </div>
 
     <script>
-      // TODO: accept parameters like height, width, theme, etc
-      function previewHandler() {
+      function preview() {
         return {
           component: null,
           snippet: null,
@@ -105,39 +111,31 @@
           stripClasses: false,
           stripStyles: false,
           setup() {
-            // TODO: Doing this here is too late as Alpine already has set it up
-            this.component = this.$el.querySelector("[x-data]");
+            this.component = this.$refs.demo;
+            this.$watch("stripClasses", this.buildSnippet.bind(this));
+            this.$watch("stripStyles", this.buildSnippet.bind(this));
+
+            // initialise
             this.buildSnippet();
-            this.$refs.demo.innerHTML = this.component.outerHTML;
-            this.$refs.source.innerHTML = this.snippet.outerHTML;
-            // this.$el.style.setProperty("display", "block");
-            this.$watch("stripClasses", this.updateSource.bind(this));
-            this.$watch("stripStyles", this.updateSource.bind(this));
-          },
-          updateSource() {
-            this.buildSnippet();
-            this.$refs.source.innerHTML = this.snippet.outerHTML;
           },
           buildSnippet() {
-            this.snippet = document.createElement("pre");
-            this.snippet.classList.add(
-              "absolute",
-              "inset-0",
-              "overflow-scroll",
-              "bg-gray-200",
-              "font-mono",
-              "p-4",
-              "pt-8"
-            );
-            this.snippet.appendChild(this.component);
-            let html = this.snippet.innerHTML;
-            const inputTokens = lolight.tok(html);
+            const html = this.component.innerHTML;
+            if (!html) {
+              this.snippet = "No component found";
+              return;
+            }
+            const rawTokens = lolight.tok(html.trim());
 
             const tokens = [];
-            for (let i = 0; i < inputTokens.length; i++) {
-              const token = inputTokens[i];
+            let indentDepth = 0;
+            let indentations = indentDepth;
+            const INDENT_NUM = 2;
+            for (let i = 0; i < rawTokens.length; i++) {
+              const token = rawTokens[i];
 
               switch (token[1]) {
+                // enable toggling of `style` and `class` attributes
+                // users might want just the markup (without styles)
                 case this.stripStyles && "style":
                 case this.stripClasses && "class": {
                   // remove 'class="foo bar"' including leading/trailing whitespace
@@ -147,8 +145,8 @@
                   // &&
                   // "foo bar" of `class="foo bar"`, token of type "str"
                   if (
-                    inputTokens[i + 1][1] === "=" &&
-                    inputTokens[i + 2][0] === "str"
+                    rawTokens[i + 1][1] === "=" &&
+                    rawTokens[i + 2][0] === "str"
                   ) {
                     tokensToSkip += 2;
                   } else {
@@ -156,7 +154,7 @@
                     break;
                   }
                   let spaceTokenIdx = i + 3;
-                  while (inputTokens[spaceTokenIdx][0] === "spc") {
+                  while (rawTokens[spaceTokenIdx][0] === "spc") {
                     tokensToSkip += 1;
                     spaceTokenIdx += 1;
                   }
@@ -164,7 +162,7 @@
                   // see if next token after removing class is `>`
                   // to get rid of leftover whitespaces
                   // eg. ` class="foo bar">` should be `>` not ` >`
-                  if (inputTokens[i + tokensToSkip + 1][1] === ">") {
+                  if (rawTokens[i + tokensToSkip + 1][1] === ">") {
                     let lastTokenIdx = tokens.length - 1;
                     while (tokens[lastTokenIdx] === " ") {
                       tokens.pop();
@@ -179,22 +177,13 @@
                   // If it's a return or new line
                   if (/\r|\n/.exec(token[1])) {
                     // The return should be first, ie strip leading spaces
-                    token[1] = token[1].replace(/\s+[\n|\r]/, "");
+                    token[1] = token[1].replace(/\s+[\n|\r]$/, "");
 
+                    indentDepth = /\s/.exec(token[1]).input.length;
                     // Check the length of the \r + tabs
                     const length = /\r|\n/.exec(token[1]).input.length;
 
-                    // Only set the spaces the first time
-                    if (typeof spacesOffset === "undefined") {
-                      // The first indent should always be 1 space,
-                      // so with the \r that would mean a length of 2
-                      // ... changed magic value to 3 to fix some line breaks disappearing
-                      spacesOffset = 3 - length;
-                    }
-                    token[1] = token[1].slice(
-                      0,
-                      spacesOffset ? spacesOffset : length
-                    );
+                    token[1] = token[1].slice(0, indentDepth);
 
                     // Replace tabs with 4 spaces
                     token[1] = token[1].replace(
@@ -203,17 +192,31 @@
                     );
                     tokens.push(token[1]);
                   } else {
-                    // TODO: Might be nicer to put each directive on it's own line
-                    // But it will take some time to get the indentation right
-                    // Perhaps use the spaceOffset from above...
-                    // if (token[1] === '@') return '\n\t@'
-                    // if (token[1] === ':') return '\n\t:'
-                    // if (token[0] === 'key') {
-                    // 	if (tokens[index + 1] && tokens[index - 1][0] == 'pct') {
-                    // 		return token[1]
-                    // 	}
-                    // 	return '\n\t' + token[1]
-                    // }
+                    function getIndentation(depth) {
+                      return (Math.floor(depth / 2) + 1) * INDENT_NUM;
+                    }
+                    function makeSpaces(count) {
+                      return Array.from({
+                        length: indentations,
+                      })
+                        .map(() => " ")
+                        .join("");
+                    }
+                    // tokens that we want to put a newline + re-indent in front of
+                    if (["@", "x"].includes(token[1])) {
+                      indentations = getIndentation(indentDepth);
+                      token[1] = `\n${makeSpaces(indentations)}${token[1]}`;
+                    }
+                    // put onto newline with -2 indent if we reindented the attributes
+                    if (
+                      indentations === getIndentation(indentDepth) &&
+                      [">"].includes(token[1]) &&
+                      rawTokens[i - 2][1] !== "/"
+                    ) {
+                      indentations -= INDENT_NUM;
+                      token[1] = `\n${makeSpaces(indentations)}${token[1]}`;
+                    }
+
                     tokens.push(
                       token[1].replace(
                         /[\u00A0-\u9999<>\&]/gim,
@@ -224,8 +227,11 @@
                 }
               }
             }
-            this.snippet.innerHTML = tokens.join("");
-            lolight.el(this.snippet); // https://larsjung.de/lolight/
+            this.snippet = tokens.join("");
+            // use refs instead of x-html in order to control `lolight` reset more easily
+            this.$refs.snippet.innerHTML = this.snippet;
+            // re-initialise https://larsjung.de/lolight/
+            lolight.el(this.$refs.snippet);
           },
           selectSnippet(event) {
             const range = document.createRange();
@@ -237,7 +243,24 @@
           copySnippet(event) {
             if (this.copied) return;
             window.getSelection().removeAllRanges();
-            event.clipboardData.setData("text/plain", this.component.outerHTML);
+
+            const component = this.component.cloneNode(true);
+
+            if (this.stripClasses) {
+              component.removeAttribute("class");
+              component
+                .querySelectorAll("[class]")
+                .forEach((el) => el.removeAttribute("class"));
+            }
+            if (this.stripStyles) {
+              component.removeAttribute("style");
+              component
+                .querySelectorAll("[style]")
+                .forEach((el) => el.removeAttribute("style"));
+            }
+
+            event.clipboardData.setData("text/plain", component.outerHTML);
+
             this.copied = true;
             setTimeout(() => {
               this.copied = false;

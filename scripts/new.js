@@ -6,8 +6,12 @@ const [name] = args;
 
 const fileName = name.endsWith(".html") ? name : `${name}.html`;
 
-const exampleContent = fs.readFileSync(
-  `${pageDir}/example-template.html`,
-  "utf8"
-);
+const exampleContent = `---
+title: "${fileName}"
+template: example.njk
+---
+<div x-data="{ msg: 'Alpine.js' }">
+  <p>Hello <span x-text="msg"></span></p>
+</div>`;
+
 fs.writeFileSync(`${pageDir}/${fileName}`, exampleContent, "utf8");

@@ -16,7 +16,10 @@
       src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.x.x/dist/alpine.min.js"
       defer
     ></script>
-    <script src="https://cdn.jsdelivr.net/gh/lrsjng/lolight@latest/dist/lolight.min.js"></script>
+    <script
+      data-cfasync="false"
+      src="https://cdn.jsdelivr.net/gh/lrsjng/lolight@latest/dist/lolight.min.js"
+    ></script>
     {% for s in scripts %}
     <script src="{{ s.url }}"></script>
     {% endfor %}

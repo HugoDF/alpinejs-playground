@@ -7,11 +7,8 @@ layout: example.njk
   x-data="{
     query: new URLSearchParams(location.search).get('q')
   }"
-  class="md:w-1/3 flex flex-col p-10"
+  class="flex flex-col"
 >
-  <h3 class="text-xl font-semibold text-gray-900 mb-4">
-    Read Query Parameter Demo
-  </h3>
   <p class="mb-2">location.search: "<span x-text="location.search"></span>"</p>
   <p class="mb-2">Param "q" (from URL): "<span x-text="query"></span>"</p>
   <p class="mb-2">

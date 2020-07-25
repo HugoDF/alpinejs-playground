@@ -35,11 +35,8 @@ layout: example.njk
     url.searchParams.set('lib', value);
     history.pushState(null, document.title, url.toString());
   })"
-  class="md:w-1/3 flex flex-col p-10"
+  class="flex flex-col md:w-2/3 mx-auto"
 >
-  <h3 class="text-xl font-semibold text-gray-900 mb-4">
-    Write Query Parameter Demo
-  </h3>
   <p class="mb-2">location.search: "<span x-text="location.search"></span>"</p>
   <p class="mb-2">
     Param "library" (initialised from "lib" URL query param): "<span

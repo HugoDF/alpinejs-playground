@@ -1,70 +1,41 @@
 ---
 title: "x-for n times/iterations"
+layout: example.njk
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Alpine.js Playground - x-for n times (a number of iterations)</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@1.x.x/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.x.x/dist/alpine.min.js"
-      defer
-    ></script>
-  </head>
+<div x-data class="md:w-1/3 flex flex-col p-10" data-reflect-root>
+  <p class="mb-4">
+    4 horizontal rules using <code>Array.from({ length: 4 })</code>:
+  </p>
+  <template x-for="_ in Array.from({ length: 4 })">
+    <hr class="mb-8" />
+  </template>
 
-  <body class="flex flex-col">
-    <header
-      class="flex w-full px-10 py-2 border border-b border-solid border-gray-600"
-    >
-      <a href="/" class="text-xl font-semibold text-gray-900">
-        Alpine.js Playground
-      </a>
-    </header>
-    <div class="flex flex-col md:flex-row">
-      <div
-        x-data
-        class="md:w-1/3 flex flex-col p-10"
-        data-reflect-root
-      >
-        <p class="mb-4">4 horizontal rules using <code>Array.from({ length: 4 })</code>:</p>
-        <template x-for="_ in Array.from({ length: 4 })">
-          <hr class="mb-8" >
-        </template>
+  <p class="mb-4">
+    4 horizontal rules using <code>new Array(4).fill(null)</code>:
+  </p>
+  <template x-for="_ in new Array(4).fill(null)">
+    <hr class="mb-8" />
+  </template>
+  <p class="mb-4">
+    4 horizontal rules using <code>new Array(4).fill(undefined)</code>:
+  </p>
+  <template x-for="_ in new Array(4).fill(undefined)">
+    <hr class="mb-8" />
+  </template>
+</div>
 
-        <p class="mb-4">4 horizontal rules using <code>new Array(4).fill(null)</code>:</p>
-        <template x-for="_ in new Array(4).fill(null)">
-          <hr class="mb-8" >
-        </template>
-        <p class="mb-4">4 horizontal rules using <code>new Array(4).fill(undefined)</code>:</p>
-        <template x-for="_ in new Array(4).fill(undefined)">
-          <hr class="mb-8" >
-        </template>
-      </div>
-
-      <div
-        x-data="reflect()"
-        data-reflect-ignore
-        class="md:w-2/3 flex flex-col p-10"
-      >
-        <div
-          class="flex flex-row items-center mb-8 pb-4 border-b border-solid border-gray-300"
-        >
-          <h3 class="text-xl font-semibold text-gray-900">Code</h3>
-          <button
-            @click="toggleShowClass()"
-            class="flex ml-4 md:ml-16 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            x-text="showClass ? 'Hide classes' : 'Show classes'"
-          ></button>
-        </div>
-        <pre><code class="w-full inline-block overflow-scroll" x-text="content()"></code></pre>
-        <script src="/reflect.js"></script>
-      </div>
-    </div>
-  </body>
-</html>
+<div x-data="reflect()" data-reflect-ignore class="md:w-2/3 flex flex-col p-10">
+  <div
+    class="flex flex-row items-center mb-8 pb-4 border-b border-solid border-gray-300"
+  >
+    <h3 class="text-xl font-semibold text-gray-900">Code</h3>
+    <button
+      @click="toggleShowClass()"
+      class="flex ml-4 md:ml-16 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      x-text="showClass ? 'Hide classes' : 'Show classes'"
+    ></button>
+  </div>
+  <pre><code class="w-full inline-block overflow-scroll" x-text="content()"></code></pre>
+  <script src="/reflect.js"></script>
+</div>

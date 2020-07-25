@@ -1,108 +1,83 @@
 ---
 title: '"reflect" function example'
+layout: example.njk
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Alpine.js Playground - "reflect" function example</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@1.x.x/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.x.x/dist/alpine.min.js"
-      defer
-    ></script>
-  </head>
-
-  <body class="flex flex-col">
-    <header
-      class="flex w-full px-10 py-2 border border-b border-solid border-gray-600"
+<div class="flex flex-col md:flex-row" x-data="reflect()" data-reflect-root>
+  <div class="md:w-1/3 flex flex-col p-10">
+    <h2 class="text-lg font-md">"reflect" function</h2>
+    <p data-reflect-ignore>
+      This paragraph won't be reflected.
+    </p>
+    <button
+      @click="toggleShowClass()"
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      x-text="showClass ? 'Hide classes' : 'Show classes'"
+    ></button>
+  </div>
+  <div
+    x-data="reflect()"
+    data-reflect-ignore
+    class="md:w-2/3 flex flex-col p-10"
+  >
+    <div
+      class="flex flex-row items-center mb-8 pb-4 border-b border-solid border-gray-300"
     >
-      <a href="/" class="text-xl font-semibold text-gray-900">
-        Alpine.js Playground
-      </a>
-    </header>
-    <div class="flex flex-col md:flex-row" x-data="reflect()" data-reflect-root>
-      <div class="md:w-1/3 flex flex-col p-10">
-        <h2 class="text-lg font-md">"reflect" function</h2>
-        <p data-reflect-ignore>
-          This paragraph won't be reflected.
-        </p>
-        <button
-          @click="toggleShowClass()"
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          x-text="showClass ? 'Hide classes' : 'Show classes'"
-        ></button>
-      </div>
-      <div
-        x-data="reflect()"
-        data-reflect-ignore
-        class="md:w-2/3 flex flex-col p-10"
-      >
-        <div
-          class="flex flex-row items-center mb-8 pb-4 border-b border-solid border-gray-300"
-        >
-          <h3 class="text-xl font-semibold text-gray-900">Code</h3>
-        </div>
-        <pre><code class="w-full inline-block overflow-scroll" x-text="content()"></code></pre>
-      </div>
-      <script>
-        function reflect() {
-          const INDENT = "\n  ";
-          const ignore = (el) => {
-            return (
-              el.dataset.hasOwnProperty("reflectIgnore") || el.tagName === "BR"
-            );
-          };
-          return {
-            showClass: false,
-            toggleShowClass() {
-              this.showClass = !this.showClass;
-            },
-            content() {
-              return this.recurse(
-                document.querySelector("[data-reflect-root]") || document.body
-              );
-            },
-            recurse(el) {
-              if (ignore(el)) {
-                return "";
-              }
-              if (el.children.length === 0) {
-                return this.wrap(el, el.innerHTML);
-              }
-              return this.wrap(
-                el,
-                [...el.children]
-                  .map((el) => this.recurse(el))
-                  .filter(Boolean)
-                  .join(INDENT)
-              );
-            },
-            wrap(el, content) {
-              const tagName = el.tagName.toLowerCase();
-              const attributes = [...el.attributes]
-                .filter(({ name }) => {
-                  if (name === "class" && !this.showClass) {
-                    return false;
-                  }
-                  return true;
-                })
-                .map(({ name, value }) => `${name}="${value}"`)
-                .join(" ");
-              return [
-                `<${tagName}${attributes ? " " + attributes : ""}>`,
-                content,
-                `</${tagName}>`,
-              ].join(INDENT);
-            },
-          };
-        }
-      </script>
+      <h3 class="text-xl font-semibold text-gray-900">Code</h3>
     </div>
-  </body>
-</html>
+    <pre><code class="w-full inline-block overflow-scroll" x-text="content()"></code></pre>
+  </div>
+  <script>
+    function reflect() {
+      const INDENT = "\n  ";
+      const ignore = (el) => {
+        return (
+          el.dataset.hasOwnProperty("reflectIgnore") || el.tagName === "BR"
+        );
+      };
+      return {
+        showClass: false,
+        toggleShowClass() {
+          this.showClass = !this.showClass;
+        },
+        content() {
+          return this.recurse(
+            document.querySelector("[data-reflect-root]") || document.body
+          );
+        },
+        recurse(el) {
+          if (ignore(el)) {
+            return "";
+          }
+          if (el.children.length === 0) {
+            return this.wrap(el, el.innerHTML);
+          }
+          return this.wrap(
+            el,
+            [...el.children]
+              .map((el) => this.recurse(el))
+              .filter(Boolean)
+              .join(INDENT)
+          );
+        },
+        wrap(el, content) {
+          const tagName = el.tagName.toLowerCase();
+          const attributes = [...el.attributes]
+            .filter(({ name }) => {
+              if (name === "class" && !this.showClass) {
+                return false;
+              }
+              return true;
+            })
+            .map(({ name, value }) => `${name}="${value}"`)
+            .join(" ");
+          return [
+            `<${tagName}${attributes ? " " + attributes : ""}>`,
+            content,
+            `</${tagName}>`,
+          ].join(INDENT);
+        },
+      };
+    }
+  </script>
+</div>

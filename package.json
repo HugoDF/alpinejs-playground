@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rm -rf dist && eleventy && inline-remote-assets 'dist/**/*.html' && cp _redirects dist",
     "start": "eleventy --serve",
-    "format": "prettier ./pages/* README.md scripts/* --write",
+    "format": "prettier ./pages/* ./_includes/* README.md scripts/* --write",
     "fmt": "yarn format"
   },
   "keywords": [

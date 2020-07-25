@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="{{ title }} - Alpine.js Playground Examples"
+    />
+    <title>{{ title }} - Alpine.js Playground Examples</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@1.x.x/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.x.x/dist/alpine.min.js"
+      defer
+    ></script>
+    {% for s in scripts %}
+    <script src="{{ s.url }}"></script>
+    {% endfor %}
+  </head>
+
+  <body class="flex flex-col">
+    <header
+      class="flex w-full px-10 py-2 border border-b border-solid border-gray-600"
+    >
+      <a href="/" class="text-xl font-semibold text-gray-900">
+        Alpine.js Playground
+      </a>
+    </header>
+    <div class="flex flex-col md:flex-row">
+      {{ content | safe }}
+    </div>
+  </body>
+</html>

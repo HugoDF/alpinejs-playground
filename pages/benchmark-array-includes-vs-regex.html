@@ -1,186 +1,147 @@
 ---
 title: "Benchmark Array#includes vs RegExp literal &
 instance"
+layout: example.njk
+scripts:
+- url: https://unpkg.com/lodash@4.17.15/lodash.js
+- url: https://unpkg.com/benchmark@2.1.4/benchmark.js
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      Alpine.js Playground - Benchmark Array#includes vs RegExp literal &
-      instance
-    </title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@1.x.x/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.x.x/dist/alpine.min.js"
-      defer
-    ></script>
-    <script src="https://unpkg.com/lodash@4.17.15/lodash.js"></script>
-    <script src="https://unpkg.com/benchmark@2.1.4/benchmark.js"></script>
-  </head>
-
-  <body class="flex flex-col">
-    <header
-      class="flex w-full px-10 py-2 border border-b border-solid border-gray-600"
+<div x-data="page()" class="md:w-1/2 flex flex-col p-10" data-reflect-root>
+  <div class="flex flex-row items-center mb-8 h-8">
+    <h3 class="text-xl font-semibold text-gray-900">
+      Benchmark Array#includes vs RegExp
+    </h3>
+  </div>
+  <div class="flex flex-row">
+    <button
+      @click="run()"
+      class="flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
     >
-      <a href="/" class="text-xl font-semibold text-gray-900">
-        Alpine.js Playground
-      </a>
-    </header>
-    <div class="flex flex-col md:flex-row">
-      <div
-        x-data="page()"
-        class="md:w-1/2 flex flex-col p-10"
-        data-reflect-root
-      >
-        <div class="flex flex-row items-center mb-8 h-8">
-          <h3 class="text-xl font-semibold text-gray-900">
-            Benchmark Array#includes vs RegExp
-          </h3>
-        </div>
-        <div class="flex flex-row">
-          <button
-            @click="run()"
-            class="flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Start Benchmark
-          </button>
-          <div class="flex py-2 px-4">
-            Status:&nbsp;
-            <template x-if="isRunning">
-              <label>Running</label>
-            </template>
-            <template x-if="!isRunning && !message">
-              <label>Ready</label>
-            </template>
-            <template x-if="!isRunning && message">
-              <label>Completed</label>
-            </template>
-          </div>
-        </div>
-        <ul>
-          <template x-for="entry in output" :key="entry">
-            <li x-text="entry"></li>
-          </template>
-        </ul>
-        <template x-if="message">
-          <div
-            class="block mt-20 p-4 border border-solid border-gray-500 rounded"
-          >
-            <h3 class="font-semibold">Summary</h3>
-            <div x-text="message"></div>
-          </div>
-        </template>
-        <script>
-          function page() {
-            const array = [
-              "allowfullscreen",
-              "allowpaymentrequest",
-              "async",
-              "autofocus",
-              "autoplay",
-              "checked",
-              "controls",
-              "default",
-              "defer",
-              "disabled",
-              "formnovalidate",
-              "hidden",
-              "ismap",
-              "itemscope",
-              "loop",
-              "multiple",
-              "muted",
-              "nomodule",
-              "novalidate",
-              "open",
-              "readonly",
-              "required",
-              "reversed",
-              "selected",
-              "typemustmatch",
-            ];
-            const regex = new RegExp(array.join("|"));
-            const literalRegex = /allowfullscreen|allowpaymentrequest|async|autofocus|autoplay|checked|controls|default|defer|disabled|formnovalidate|hidden|ismap|itemscope|loop|multiple|muted|nomodule|novalidate|open|readonly|required|reversed|selected|typemustmatch/;
-            // add tests
-            const match = "hidden";
-            const noMatch = "class";
-
-            const suite = new Benchmark.Suite();
-            suite
-              .add("RegExpInstance#test - match", function () {
-                regex.test(match);
-              })
-              .add("Array#includes - match", function () {
-                array.includes(match);
-              })
-              .add("RegExpLiteral#test - match", function () {
-                literalRegex.test(match);
-              })
-              .add("RegExpInstance#test - no match", function () {
-                regex.test(noMatch);
-              })
-              .add("Array#includes - no match", function () {
-                array.includes(noMatch);
-              })
-              .add("RegExpInstance#test - no match", function () {
-                literalRegex.test(noMatch);
-              });
-
-            return {
-              isRunning: false,
-              message: "",
-              output: [],
-              suite,
-              tests: suite.map((t) => t.name),
-              run() {
-                // cache Alpine instance under $vm (Vue.js instance).
-                const $vm = this;
-                // reset
-                this.message = "";
-                this.output = [];
-                // set to "running"
-                this.isRunning = true;
-                this.suite
-                  .on("cycle", function (event) {
-                    $vm.output = [...$vm.output, String(event.target)];
-                  })
-                  .on("complete", function () {
-                    $vm.message = `Fastest is ${this.filter("fastest").map(
-                      "name"
-                    )}\nSlowest is ${this.filter("slowest").map("name")}`;
-                    $vm.isRunning = false;
-                  })
-                  .run({ async: true });
-              },
-            };
-          }
-        </script>
-      </div>
-
-      <div
-        x-data="reflect()"
-        data-reflect-ignore
-        class="md:w-1/2 flex flex-col p-10"
-      >
-        <div
-          class="flex flex-row items-center mb-8 pb-4 border-b border-solid border-gray-300"
-        >
-          <h3 class="text-xl font-semibold text-gray-900">Code</h3>
-          <button
-            @click="toggleShowClass()"
-            class="flex ml-4 md:ml-16 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            x-text="showClass ? 'Hide classes' : 'Show classes'"
-          ></button>
-        </div>
-        <pre><code class="w-full inline-block overflow-scroll" x-text="content()"></code></pre>
-        <script src="/reflect.js"></script>
-      </div>
+      Start Benchmark
+    </button>
+    <div class="flex py-2 px-4">
+      Status:&nbsp;
+      <template x-if="isRunning">
+        <label>Running</label>
+      </template>
+      <template x-if="!isRunning && !message">
+        <label>Ready</label>
+      </template>
+      <template x-if="!isRunning && message">
+        <label>Completed</label>
+      </template>
     </div>
-  </body>
-</html>
+  </div>
+  <ul>
+    <template x-for="entry in output" :key="entry">
+      <li x-text="entry"></li>
+    </template>
+  </ul>
+  <template x-if="message">
+    <div class="block mt-20 p-4 border border-solid border-gray-500 rounded">
+      <h3 class="font-semibold">Summary</h3>
+      <div x-text="message"></div>
+    </div>
+  </template>
+  <script>
+    function page() {
+      const array = [
+        "allowfullscreen",
+        "allowpaymentrequest",
+        "async",
+        "autofocus",
+        "autoplay",
+        "checked",
+        "controls",
+        "default",
+        "defer",
+        "disabled",
+        "formnovalidate",
+        "hidden",
+        "ismap",
+        "itemscope",
+        "loop",
+        "multiple",
+        "muted",
+        "nomodule",
+        "novalidate",
+        "open",
+        "readonly",
+        "required",
+        "reversed",
+        "selected",
+        "typemustmatch",
+      ];
+      const regex = new RegExp(array.join("|"));
+      const literalRegex = /allowfullscreen|allowpaymentrequest|async|autofocus|autoplay|checked|controls|default|defer|disabled|formnovalidate|hidden|ismap|itemscope|loop|multiple|muted|nomodule|novalidate|open|readonly|required|reversed|selected|typemustmatch/;
+      // add tests
+      const match = "hidden";
+      const noMatch = "class";
+
+      const suite = new Benchmark.Suite();
+      suite
+        .add("RegExpInstance#test - match", function () {
+          regex.test(match);
+        })
+        .add("Array#includes - match", function () {
+          array.includes(match);
+        })
+        .add("RegExpLiteral#test - match", function () {
+          literalRegex.test(match);
+        })
+        .add("RegExpInstance#test - no match", function () {
+          regex.test(noMatch);
+        })
+        .add("Array#includes - no match", function () {
+          array.includes(noMatch);
+        })
+        .add("RegExpInstance#test - no match", function () {
+          literalRegex.test(noMatch);
+        });
+
+      return {
+        isRunning: false,
+        message: "",
+        output: [],
+        suite,
+        tests: suite.map((t) => t.name),
+        run() {
+          // cache Alpine instance under $vm (Vue.js instance).
+          const $vm = this;
+          // reset
+          this.message = "";
+          this.output = [];
+          // set to "running"
+          this.isRunning = true;
+          this.suite
+            .on("cycle", function (event) {
+              $vm.output = [...$vm.output, String(event.target)];
+            })
+            .on("complete", function () {
+              $vm.message = `Fastest is ${this.filter("fastest").map(
+                "name"
+              )}\nSlowest is ${this.filter("slowest").map("name")}`;
+              $vm.isRunning = false;
+            })
+            .run({ async: true });
+        },
+      };
+    }
+  </script>
+</div>
+
+<div x-data="reflect()" data-reflect-ignore class="md:w-1/2 flex flex-col p-10">
+  <div
+    class="flex flex-row items-center mb-8 pb-4 border-b border-solid border-gray-300"
+  >
+    <h3 class="text-xl font-semibold text-gray-900">Code</h3>
+    <button
+      @click="toggleShowClass()"
+      class="flex ml-4 md:ml-16 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      x-text="showClass ? 'Hide classes' : 'Show classes'"
+    ></button>
+  </div>
+  <pre><code class="w-full inline-block overflow-scroll" x-text="content()"></code></pre>
+  <script src="/reflect.js"></script>
+</div>

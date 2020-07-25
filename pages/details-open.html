@@ -3,20 +3,15 @@ title: "Details Open Binding"
 layout: example.njk
 ---
 
-<div x-data="{ isOpen: false }" class="md:w-1/3 flex flex-col p-10">
-  <div class="flex flex-row items-center mb-8 h-8">
-    <h3 class="text-xl font-semibold text-gray-900">
-      Details bound "open" attribute
-    </h3>
-  </div>
+<div x-data="{ isOpen: false }" class="flex flex-col">
   <button
     @click="isOpen = !isOpen"
-    class="mt-10 w-2/3 justify-center flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    class="mt-10 w-32 justify-center flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
   >
     Toggle
   </button>
-  <label class="block">isOpen: "<span x-text="isOpen"></span>"</label>
-  <details :open="isOpen" class="mt-4">
+  <label class="flex">isOpen: "<span x-text="isOpen"></span>"</label>
+  <details :open="isOpen" class="flex mt-4">
     <summary>Summary</summary>
     <ul>
       <li>First of all</li>

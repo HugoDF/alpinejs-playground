@@ -47,14 +47,14 @@
       x-init="setup"
       class="flex flex-col relative w-full h-full mx-auto shadow"
     >
-      <header
+      <div
         class="flex flex-row justify-between bg-gray-500 px-4 items-center leading-none fixed inset-0 h-8 z-10"
         style="top: 3rem;"
       >
         <h2 class="flex items-center text-white font-extrabold">
           {{ title }}
         </h2>
-        <menu x-cloak class="flex divide-x-2 divide-gray-600">
+        <div x-cloak class="flex divide-x-2 divide-gray-600">
           <button
             class="px-2 text-white hover:underline focus:outline-none"
             @click="stripClasses = !stripClasses"
@@ -75,8 +75,8 @@
           >
             copy source
           </button>
-        </menu>
-      </header>
+        </div>
+      </div>
       <div class="flex h-full flex-col md:flex-row relative">
         <span
           class="italic text-sm absolute bottom-0 right-0 mr-2 mb-2 z-10"
@@ -86,7 +86,7 @@
         >
         <div
           x-ref="demo"
-          class="flex w-full md:w-1/2 items-start p-4 md:p-10 justify-center bg-gray-300 md:h-full"
+          class="flex w-full md:w-1/2 items-start p-4 md:p-10 justify-center bg-gray-300 md:h-full overflow-y-scroll"
           x-cloak
         >
           {{ content | safe }}

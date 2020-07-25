@@ -16,21 +16,235 @@
       src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.x.x/dist/alpine.min.js"
       defer
     ></script>
+    <script src="https://cdn.jsdelivr.net/gh/lrsjng/lolight@latest/dist/lolight.min.js"></script>
     {% for s in scripts %}
     <script src="{{ s.url }}"></script>
     {% endfor %}
+    <style>
+      [x-cloak] {
+        display: none;
+      }
+    </style>
   </head>
 
-  <body class="flex flex-col">
+  <body class="flex min-h-screen flex-col">
     <header
-      class="flex w-full px-10 py-2 border border-b border-solid border-gray-600"
+      class="flex flex-row justify-between items-center w-full p-4 border border-b border-solid border-gray-600"
     >
-      <a href="/" class="text-xl font-semibold text-gray-900">
+      <a href="/" class="flex text-xl font-semibold text-gray-900">
         Alpine.js Playground
       </a>
+      <div class="flex flex-row">
+        <a class="flex px-2" href="/">Examples</a>
+        <a class="flex px-2" href="/newsletter">Newsletter</a>
+      </div>
     </header>
-    <div class="flex flex-col md:flex-row">
-      {{ content | safe }}
+    <div
+      x-data="previewHandler()"
+      x-init="setup"
+      class="flex flex-col relative w-full h-full mx-auto shadow"
+    >
+      <header
+        class="flex flex-row justify-between bg-gray-500 px-4 py-2 leading-none"
+      >
+        <h2 class="flex items-center text-white font-extrabold">
+          Code Preview Demo
+        </h2>
+        <menu x-cloak class="flex divide-x-2 divide-gray-600">
+          <button
+            class="px-2 text-white hover:underline focus:outline-none"
+            @click="stripClasses = !stripClasses"
+          >
+            toggle classes
+          </button>
+          <button
+            class="px-2 text-white hover:underline focus:outline-none"
+            @click="stripStyles = !stripStyles"
+          >
+            toggle styles
+          </button>
+          <button
+            class="px-2 text-white hover:underline focus:outline-none"
+            @click.prevent="selectSnippet($event)"
+            @copy.document.prevent="copySnippet($event)"
+          >
+            copy source
+          </button>
+        </menu>
+      </header>
+      <div class="flex h-full md:flex-row relative">
+        <span
+          class="italic text-sm absolute bottom-0 right-0 mr-2 mb-2 z-10"
+          x-show.transition.opacity.duration.350ms="copied"
+          x-cloak
+          >Copied!</span
+        >
+        <div
+          x-ref="demo"
+          class="flex min-h-full w-full md:w-1/2 items-center justify-center bg-gray-300"
+          style="min-height: 500px;"
+          x-cloak
+        >
+          {{ content | safe }}
+        </div>
+        <div
+          x-ref="source"
+          class="relative flex min-h-full w-full md:w-1/2 items-center justify-center bg-gray-300"
+          style="min-height: 500px;"
+        ></div>
+      </div>
     </div>
+
+    <script>
+      // TODO: accept parameters like height, width, theme, etc
+      function previewHandler() {
+        return {
+          component: null,
+          snippet: null,
+          copied: false,
+          stripClasses: false,
+          stripStyles: false,
+          setup() {
+            // TODO: Doing this here is too late as Alpine already has set it up
+            this.component = this.$el.querySelector("[x-data]");
+            this.buildSnippet();
+            this.$refs.demo.innerHTML = this.component.outerHTML;
+            this.$refs.source.innerHTML = this.snippet.outerHTML;
+            // this.$el.style.setProperty("display", "block");
+            this.$watch("stripClasses", this.updateSource.bind(this));
+            this.$watch("stripStyles", this.updateSource.bind(this));
+          },
+          updateSource() {
+            this.buildSnippet();
+            this.$refs.source.innerHTML = this.snippet.outerHTML;
+          },
+          buildSnippet() {
+            this.snippet = document.createElement("pre");
+            this.snippet.classList.add(
+              "absolute",
+              "inset-0",
+              "overflow-scroll",
+              "bg-gray-200",
+              "font-mono",
+              "p-4",
+              "pt-8"
+            );
+            this.snippet.appendChild(this.component);
+            let html = this.snippet.innerHTML;
+            const inputTokens = lolight.tok(html);
+
+            const tokens = [];
+            for (let i = 0; i < inputTokens.length; i++) {
+              const token = inputTokens[i];
+
+              switch (token[1]) {
+                case this.stripStyles && "style":
+                case this.stripClasses && "class": {
+                  // remove 'class="foo bar"' including leading/trailing whitespace
+                  // get rid of class="foo bar" + trailing whitespace
+                  let tokensToSkip = 0;
+                  // "=" of `class="foo bar"`
+                  // &&
+                  // "foo bar" of `class="foo bar"`, token of type "str"
+                  if (
+                    inputTokens[i + 1][1] === "=" &&
+                    inputTokens[i + 2][0] === "str"
+                  ) {
+                    tokensToSkip += 2;
+                  } else {
+                    // class without a value, do nothing
+                    break;
+                  }
+                  let spaceTokenIdx = i + 3;
+                  while (inputTokens[spaceTokenIdx][0] === "spc") {
+                    tokensToSkip += 1;
+                    spaceTokenIdx += 1;
+                  }
+
+                  // see if next token after removing class is `>`
+                  // to get rid of leftover whitespaces
+                  // eg. ` class="foo bar">` should be `>` not ` >`
+                  if (inputTokens[i + tokensToSkip + 1][1] === ">") {
+                    let lastTokenIdx = tokens.length - 1;
+                    while (tokens[lastTokenIdx] === " ") {
+                      tokens.pop();
+                      lastTokenIdx -= 1;
+                    }
+                  }
+
+                  i += tokensToSkip;
+                  break;
+                }
+                default: {
+                  // If it's a return or new line
+                  if (/\r|\n/.exec(token[1])) {
+                    // The return should be first, ie strip leading spaces
+                    token[1] = token[1].replace(/\s+[\n|\r]/, "");
+
+                    // Check the length of the \r + tabs
+                    const length = /\r|\n/.exec(token[1]).input.length;
+
+                    // Only set the spaces the first time
+                    if (typeof spacesOffset === "undefined") {
+                      // The first indent should always be 1 space,
+                      // so with the \r that would mean a length of 2
+                      // ... changed magic value to 3 to fix some line breaks disappearing
+                      spacesOffset = 3 - length;
+                    }
+                    token[1] = token[1].slice(
+                      0,
+                      spacesOffset ? spacesOffset : length
+                    );
+
+                    // Replace tabs with 4 spaces
+                    token[1] = token[1].replace(
+                      /\t/g,
+                      "&nbsp;&nbsp;&nbsp;&nbsp;"
+                    );
+                    tokens.push(token[1]);
+                  } else {
+                    // TODO: Might be nicer to put each directive on it's own line
+                    // But it will take some time to get the indentation right
+                    // Perhaps use the spaceOffset from above...
+                    // if (token[1] === '@') return '\n\t@'
+                    // if (token[1] === ':') return '\n\t:'
+                    // if (token[0] === 'key') {
+                    // 	if (tokens[index + 1] && tokens[index - 1][0] == 'pct') {
+                    // 		return token[1]
+                    // 	}
+                    // 	return '\n\t' + token[1]
+                    // }
+                    tokens.push(
+                      token[1].replace(
+                        /[\u00A0-\u9999<>\&]/gim,
+                        (i) => "&#" + i.charCodeAt(0) + ";"
+                      )
+                    );
+                  }
+                }
+              }
+            }
+            this.snippet.innerHTML = tokens.join("");
+            lolight.el(this.snippet); // https://larsjung.de/lolight/
+          },
+          selectSnippet(event) {
+            const range = document.createRange();
+            range.selectNode(event.target);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand("copy");
+          },
+          copySnippet(event) {
+            if (this.copied) return;
+            window.getSelection().removeAllRanges();
+            event.clipboardData.setData("text/plain", this.component.outerHTML);
+            this.copied = true;
+            setTimeout(() => {
+              this.copied = false;
+            }, 2000);
+          },
+        };
+      }
+    </script>
   </body>
 </html>

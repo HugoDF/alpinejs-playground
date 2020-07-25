@@ -27,9 +27,9 @@
     </style>
   </head>
 
-  <body class="flex min-h-screen flex-col">
+  <body class="flex h-screen flex-col pt-20">
     <header
-      class="flex flex-row justify-between items-center w-full p-4 border"
+      class="flex flex-row justify-between items-center w-full p-4 border fixed top-0 left-0 z-10 bg-white h-12"
     >
       <a
         href="/"
@@ -48,7 +48,8 @@
       class="flex flex-col relative w-full h-full mx-auto shadow"
     >
       <header
-        class="flex flex-row justify-between bg-gray-500 px-4 py-2 leading-none"
+        class="flex flex-row justify-between bg-gray-500 px-4 items-center leading-none fixed inset-0 h-8 z-10"
+        style="top: 3rem;"
       >
         <h2 class="flex items-center text-white font-extrabold">
           {{ title }}
@@ -62,6 +63,7 @@
           </button>
           <button
             class="px-2 text-white hover:underline focus:outline-none"
+            x-show="$refs.demo.querySelectorAll('[styles]').length > 0"
             @click="stripStyles = !stripStyles"
           >
             toggle styles
@@ -84,19 +86,17 @@
         >
         <div
           x-ref="demo"
-          class="flex min-h-full w-full md:w-1/2 items-center justify-center bg-gray-300"
-          style="min-height: 500px;"
+          class="flex w-full md:w-1/2 items-start p-4 md:p-10 justify-center bg-gray-300 md:h-full"
           x-cloak
         >
           {{ content | safe }}
         </div>
         <div
-          class="flex min-h-full w-full md:w-1/2 items-center justify-center bg-gray-300"
-          style="min-height: 500px;"
+          class="flex w-full md:w-1/2 items-start justify-center bg-gray-200 overflow-scroll md:h-full"
         >
           <pre
             x-ref="snippet"
-            class="min-h-full w-full inset-0 overflow-scroll bg-gray-200 font-mono p-4 pt-8"
+            class="w-full h-full font-mono p-2 md:p-4"
           ></pre>
         </div>
       </div>

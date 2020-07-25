@@ -7,13 +7,8 @@ scripts:
 - url: https://unpkg.com/benchmark@2.1.4/benchmark.js
 ---
 
-<div x-data="page()" class="md:w-1/2 flex flex-col p-10" data-reflect-root>
-  <div class="flex flex-row items-center mb-8 h-8">
-    <h3 class="text-xl font-semibold text-gray-900">
-      Benchmark Array#includes vs RegExp
-    </h3>
-  </div>
-  <div class="flex flex-row">
+<div x-data="page()" class="flex flex-col w-full">
+  <div class="flex flex-row w-full align-start">
     <button
       @click="run()"
       class="flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -129,19 +124,4 @@ scripts:
       };
     }
   </script>
-</div>
-
-<div x-data="reflect()" data-reflect-ignore class="md:w-1/2 flex flex-col p-10">
-  <div
-    class="flex flex-row items-center mb-8 pb-4 border-b border-solid border-gray-300"
-  >
-    <h3 class="text-xl font-semibold text-gray-900">Code</h3>
-    <button
-      @click="toggleShowClass()"
-      class="flex ml-4 md:ml-16 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      x-text="showClass ? 'Hide classes' : 'Show classes'"
-    ></button>
-  </div>
-  <pre><code class="w-full inline-block overflow-scroll" x-text="content()"></code></pre>
-  <script src="/reflect.js"></script>
 </div>

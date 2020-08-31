@@ -25,7 +25,7 @@
     "inline-remote-assets": "^0.4.0",
     "js-yaml": "^3.14.0",
     "node-fetch": "^2.6.0",
-    "prettier": "^2.1.0",
+    "prettier": "^2.1.1",
     "purgecss": "^2.3.0"
   }
 }

@@ -16,16 +16,20 @@ title: "Alpine.js Weekly - Newsletter"
       href="https://cdn.jsdelivr.net/npm/tailwindcss@1.x.x/dist/tailwind.min.css"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@tailwindcss/typography@0.2.x/dist/typography.min.css"
+    />
   </head>
 
   <body class="flex flex-col">
-    <div class="flex mx-auto md:2/3 lg:w-2/4 flex-col px-8 md:px-32 py-24">
-      <h2 class="text-xl font-semibold w-full text-center text-gray-900 mb-8">
+    <div class="flex mx-auto max-w-lg flex-col px-8 md:px-10 py-24">
+      <h2 class="text-2xl font-bold w-full text-center text-gray-900 mb-8">
         Alpine.js Weekly
       </h2>
 
       <p class="leading-relaxed mb-4">
-        A free, once–weekly email roundup of
+        A free, once–weekly (every Friday) email roundup of
         <a
           class="text-blue-500 hover:text-blue-800 hover:underline"
           href="https://github.com/alpinejs/alpine"
@@ -35,7 +39,7 @@ title: "Alpine.js Weekly - Newsletter"
         news and articles.
       </p>
 
-      <p class="leading-relaxed mb-4">
+      <p class="leading-relaxed">
         Packed with hot discussions, new features, tools, articles & tutorials.
       </p>
 
@@ -44,13 +48,111 @@ title: "Alpine.js Weekly - Newsletter"
         method="post"
         target="popupwindow"
         onsubmit="window.open('https://buttondown.email/alpinejs', 'popupwindow')"
-        class="rounded pt-6 pb-8 mb-4 embeddable-buttondown-form"
+        class="rounded pt-6 pb-8 embeddable-buttondown-form"
       >
         <div class="flex flex-col">
           <label
             class="flex text-gray-700 font-semibold mb-2 text-sm"
             for="bd-email"
-            >Enter your email</label
+            >Stay up to date with Alpine.js</label
+          >
+          <input
+            placeholder="calebporzio@alpinejs.org"
+            class="flex mb-2 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 appearance-none leading-normal"
+            type="email"
+            name="email"
+            id="bd-email"
+            required="required"
+          />
+          <input type="hidden" value="1" name="embed" />
+          <input
+            class="flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            type="submit"
+            value="Subscribe"
+          />
+        </div>
+      </form>
+
+      <div class="prose">
+        <blockquote>
+          <p>
+            If you&#39;re into Alpine, one of the core contributors
+            <a href="https://twitter.com/hugo__df?ref_src=twsrc%5Etfw"
+              >@hugo__df</a
+            >
+            curates a weekly no-nonsense Alpine newsletter.
+          </p>
+          <p>
+            I learn so much about how the framework is being used from this
+            newsletter honestly:
+          </p>
+          <p>
+            <a href="https://alpinejs.codewithhugo.com/newsletter/"
+              >alpinejs.codewithhugo.com/newsletter/</a
+            >
+          </p>
+        </blockquote>
+        <p>
+          <img
+            class="inline-block h-10 w-10 rounded"
+            style="margin: 0;"
+            alt="Caleb Porzio"
+            src="data:image/jpeg;base64,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"
+          />
+          <!-- base64 URI of "https://images.weserv.nl/?url=https://unavatar.now.sh/twitter/calebporzio&w=100&l=9&af&il&n=-1" -->
+          <a href="https://twitter.com/calebporzio/status/1253741270184480770">
+            @calebporzio
+          </a>
+          - creator of Alpine.js
+        </p>
+        <blockquote>
+          <p>
+            If you want to keep up to date with the world of
+            <a href="https://twitter.com/Alpine_JS?ref_src=twsrc%5Etfw"
+              >@Alpine_JS</a
+            >, I can&#39;t recommend the Alpine.js Weekly newsletter enough.
+          </p>
+          <p>
+            <a href="https://alpinejs.codewithhugo.com/newsletter/"
+              >alpinejs.codewithhugo.com/newsletter/</a
+            >
+          </p>
+          <p>
+            <a href="https://twitter.com/hugo__df?ref_src=twsrc%5Etfw"
+              >@hugo__df</a
+            >
+            packs SO much into it every single week 👏
+          </p>
+        </blockquote>
+        <p>
+          <img
+            class="inline-block h-10 w-10 rounded"
+            style="margin: 0;"
+            src="data:image/jpeg;base64,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"
+            alt="Team CodeCourse"
+          />
+          <!-- data URI of: https://images.weserv.nl/?url=https://unavatar.now.sh/twitter/teamcodecourse&w=100&l=9&af&il&n=-1 -->
+          <a
+            href="https://twitter.com/teamcodecourse/status/1279106548246216705"
+          >
+            @teamcodecourse
+          </a>
+          - author of an Alpine course
+        </p>
+      </div>
+
+      <form
+        action="https://buttondown.email/api/emails/embed-subscribe/alpinejs"
+        method="post"
+        target="popupwindow"
+        onsubmit="window.open('https://buttondown.email/alpinejs', 'popupwindow')"
+        class="rounded pt-6 pb-8 mb-2 embeddable-buttondown-form"
+      >
+        <div class="flex flex-col">
+          <label
+            class="flex text-gray-700 font-semibold mb-2 text-sm"
+            for="bd-email"
+            >Stay up to date with Alpine.js</label
           >
           <input
             placeholder="calebporzio@alpinejs.org"

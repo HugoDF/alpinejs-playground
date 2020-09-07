@@ -1677,10 +1677,10 @@ ini@^1.3.4:
   resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.5.tgz#eee25f56db1c9ec6085e0c22778083f596abf927"
   integrity sha512-RZY5huIKCMRWDUqZlEi72f/lmXKMvuszcMBduliQ3nnWbx9X/ZBQO7DijMEYS9EhHBb2qacRUMtC7svLwe0lcw==
 
-inline-remote-assets@^0.5.1:
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/inline-remote-assets/-/inline-remote-assets-0.5.1.tgz#9f50652a12e3b3ec3210934b092fe8026ede6bf4"
-  integrity sha512-ek4+dSaancBlegkmzkDT61tdFsHnsZ9cTzuH2FSaP6UFUbh+sS2ShRg68El5OkFu7EF0FwE4pINzI/jMEbspGw==
+inline-remote-assets@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/inline-remote-assets/-/inline-remote-assets-0.6.1.tgz#1caa9cf4496dbbef98fc42d6d9dfbce744e2fa1c"
+  integrity sha512-7UB4JPMuq6RwxvCTGllm0PR8Dro4Fo8dt+ostgyqCA1KsOPuLWuE9xsICFNrverVrvQRA3pR/AHRcNnuMFcZQw==
   dependencies:
     find-cache-dir "^3.3.1"
     meow "^7.0.1"

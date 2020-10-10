@@ -14,8 +14,11 @@ layout: example.njk
     >
       <option value="">Select an option</option>
       <template x-for="option in options">
-        <option :key="option.value" :value="option.value" x-text="option.text">
-        </option>
+        <option
+          :key="option.value"
+          :value="option.value"
+          x-text="option.text"
+        ></option>
       </template>
     </select>
     <button

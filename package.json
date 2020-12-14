@@ -26,6 +26,6 @@
     "js-yaml": "^3.14.1",
     "node-fetch": "^2.6.1",
     "prettier": "^2.2.1",
-    "purgecss": "^3.0.0"
+    "purgecss": "^3.1.0"
   }
 }

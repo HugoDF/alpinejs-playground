@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "description": "A set of ready to use Alpine.js examples with TailwindCSS",
   "scripts": {
-    "build": "rm -rf dist && eleventy && inline-remote-assets 'dist/**/*.html' && cp _redirects dist",
+    "build": "rm -rf dist && NODE_ENV=production eleventy && inline-remote-assets 'dist/**/*.html' && cp _redirects dist",
     "start": "eleventy --serve",
-    "format": "prettier ./pages/* ./_includes/* README.md scripts/* --write",
+    "format": "prettier ./pages/* ./_includes/* README.md scripts/* assets/* --write",
     "fmt": "yarn format"
   },
   "keywords": [
@@ -20,10 +20,13 @@
   "dependencies": {},
   "devDependencies": {
     "@11ty/eleventy": "^0.11.1",
+    "alpinejs": "^2.8.0",
     "buttondown": "^1.1.1",
+    "esbuild": "^0.8.23",
     "glob": "^7.1.6",
     "inline-remote-assets": "^0.7.0",
     "js-yaml": "^3.14.1",
+    "lolight": "^1.4.0",
     "node-fetch": "^2.6.1",
     "prettier": "^2.2.1",
     "purgecss": "^3.1.3"

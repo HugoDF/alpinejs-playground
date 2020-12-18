@@ -12,14 +12,6 @@
       href="https://cdn.jsdelivr.net/npm/tailwindcss@1.x.x/dist/tailwind.min.css"
       rel="stylesheet"
     />
-    <script
-      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.x.x/dist/alpine.min.js"
-      defer
-    ></script>
-    <script
-      data-cfasync="false"
-      src="https://cdn.jsdelivr.net/gh/lrsjng/lolight@latest/dist/lolight.min.js"
-    ></script>
     {% for s in scripts %}
     <script src="{{ s.url }}"></script>
     {% endfor %}
@@ -58,7 +50,14 @@
         <div x-cloak class="flex divide-x-2 divide-gray-600">
           <button
             class="px-2 text-white hover:underline focus:outline-none"
+            @click="toggleEdit"
+            x-text="isEditing ? 'save' : 'edit'"
+          ></button>
+          <button
+            class="px-2 text-white hover:underline focus:outline-none"
             @click="stripClasses = !stripClasses"
+            :class="{ 'cursor-not-allowed': isEditing }"
+            :disabled="isEditing"
           >
             toggle classes
           </button>
@@ -66,6 +65,8 @@
             class="px-2 text-white hover:underline focus:outline-none"
             x-show="$refs.demo.querySelectorAll('[styles]').length > 0"
             @click="stripStyles = !stripStyles"
+            :class="{ 'cursor-not-allowed': isEditing }"
+            :disabled="isEditing"
           >
             toggle styles
           </button>
@@ -73,6 +74,8 @@
             class="px-2 text-white hover:underline focus:outline-none"
             @click.prevent="selectSnippet($event)"
             @copy.document.prevent="copySnippet($event)"
+            :class="{ 'cursor-not-allowed': isEditing }"
+            :disabled="isEditing"
           >
             copy source
           </button>
@@ -95,178 +98,17 @@
         <div
           class="flex w-full md:w-1/2 items-start justify-center bg-gray-200 overflow-scroll md:h-full"
         >
-          <pre x-ref="snippet" class="w-full h-full font-mono p-2 md:p-4"></pre>
+          <pre
+            x-ref="snippet"
+            class="w-full h-full font-mono p-2 md:p-4"
+            :contenteditable="isEditing"
+            @input="snippet = $event.target.innerHTML"
+          ></pre>
         </div>
       </div>
     </div>
 
-    <script>
-      function preview() {
-        return {
-          component: null,
-          snippet: null,
-          copied: false,
-          stripClasses: false,
-          stripStyles: false,
-          setup() {
-            this.component = this.$refs.demo;
-            this.$watch("stripClasses", this.buildSnippet.bind(this));
-            this.$watch("stripStyles", this.buildSnippet.bind(this));
-
-            // initialise
-            this.buildSnippet();
-          },
-          buildSnippet() {
-            const html = this.component.innerHTML;
-            if (!html) {
-              this.snippet = "No component found";
-              return;
-            }
-            const rawTokens = lolight.tok(html.trim());
-
-            const tokens = [];
-            let indentDepth = 0;
-            let indentations = indentDepth;
-            const INDENT_NUM = 2;
-            for (let i = 0; i < rawTokens.length; i++) {
-              const token = rawTokens[i];
-
-              switch (token[1]) {
-                // enable toggling of `style` and `class` attributes
-                // users might want just the markup (without styles)
-                case this.stripStyles && "style":
-                case this.stripClasses && "class": {
-                  // remove 'class="foo bar"' including leading/trailing whitespace
-                  // get rid of class="foo bar" + trailing whitespace
-                  let tokensToSkip = 0;
-                  // "=" of `class="foo bar"`
-                  // &&
-                  // "foo bar" of `class="foo bar"`, token of type "str"
-                  if (
-                    rawTokens[i + 1][1] === "=" &&
-                    rawTokens[i + 2][0] === "str"
-                  ) {
-                    tokensToSkip += 2;
-                  } else {
-                    // class without a value, do nothing
-                    break;
-                  }
-                  let spaceTokenIdx = i + 3;
-                  while (rawTokens[spaceTokenIdx][0] === "spc") {
-                    tokensToSkip += 1;
-                    spaceTokenIdx += 1;
-                  }
-
-                  // see if next token after removing class is `>`
-                  // to get rid of leftover whitespaces
-                  // eg. ` class="foo bar">` should be `>` not ` >`
-                  if (rawTokens[i + tokensToSkip + 1][1] === ">") {
-                    let lastTokenIdx = tokens.length - 1;
-                    while (tokens[lastTokenIdx] === " ") {
-                      tokens.pop();
-                      lastTokenIdx -= 1;
-                    }
-                  }
-
-                  i += tokensToSkip;
-                  break;
-                }
-                default: {
-                  // If it's a return or new line
-                  if (/\r|\n/.exec(token[1])) {
-                    // The return should be first, ie strip leading spaces
-                    token[1] = token[1].replace(/\s+[\n|\r]$/, "");
-
-                    indentDepth = /\s/.exec(token[1]).input.length;
-                    // Check the length of the \r + tabs
-                    const length = /\r|\n/.exec(token[1]).input.length;
-
-                    token[1] = token[1].slice(0, indentDepth);
-
-                    // Replace tabs with 4 spaces
-                    token[1] = token[1].replace(
-                      /\t/g,
-                      "&nbsp;&nbsp;&nbsp;&nbsp;"
-                    );
-                    tokens.push(token[1]);
-                  } else {
-                    function getIndentation(depth) {
-                      return (Math.floor(depth / 2) + 1) * INDENT_NUM;
-                    }
-                    function makeSpaces(count) {
-                      return Array.from({
-                        length: indentations,
-                      })
-                        .map(() => " ")
-                        .join("");
-                    }
-                    // tokens that we want to put a newline + re-indent in front of
-                    if (["@", "x"].includes(token[1])) {
-                      indentations = getIndentation(indentDepth);
-                      token[1] = `\n${makeSpaces(indentations)}${token[1]}`;
-                    }
-                    // put onto newline with -2 indent if we reindented the attributes
-                    if (
-                      indentations === getIndentation(indentDepth) &&
-                      [">"].includes(token[1]) &&
-                      rawTokens[i - 2][1] !== "/"
-                    ) {
-                      indentations -= INDENT_NUM;
-                      token[1] = `\n${makeSpaces(indentations)}${token[1]}`;
-                    }
-
-                    tokens.push(
-                      token[1].replace(
-                        /[\u00A0-\u9999<>\&]/gim,
-                        (i) => "&#" + i.charCodeAt(0) + ";"
-                      )
-                    );
-                  }
-                }
-              }
-            }
-            this.snippet = tokens.join("");
-            // use refs instead of x-html in order to control `lolight` reset more easily
-            this.$refs.snippet.innerHTML = this.snippet;
-            // re-initialise https://larsjung.de/lolight/
-            lolight.el(this.$refs.snippet);
-          },
-          selectSnippet(event) {
-            const range = document.createRange();
-            range.selectNode(event.target);
-            window.getSelection().removeAllRanges();
-            window.getSelection().addRange(range);
-            document.execCommand("copy");
-          },
-          copySnippet(event) {
-            if (this.copied) return;
-            window.getSelection().removeAllRanges();
-
-            const component = this.component.cloneNode(true);
-
-            if (this.stripClasses) {
-              component.removeAttribute("class");
-              component
-                .querySelectorAll("[class]")
-                .forEach((el) => el.removeAttribute("class"));
-            }
-            if (this.stripStyles) {
-              component.removeAttribute("style");
-              component
-                .querySelectorAll("[style]")
-                .forEach((el) => el.removeAttribute("style"));
-            }
-
-            event.clipboardData.setData("text/plain", component.outerHTML);
-
-            this.copied = true;
-            setTimeout(() => {
-              this.copied = false;
-            }, 2000);
-          },
-        };
-      }
-    </script>
+    <script src="/editor.js"></script>
     <div
       class="fixed inset-x-0 bottom-0 bg-blue-700 text-white text-center min-h-8 md:h-16 flex items-center justify-center font-medium"
     >

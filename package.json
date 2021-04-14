@@ -22,7 +22,7 @@
     "@11ty/eleventy": "^0.12.1",
     "alpinejs": "^2.8.2",
     "buttondown": "^1.1.1",
-    "esbuild": "^0.11.9",
+    "esbuild": "^0.11.10",
     "glob": "^7.1.6",
     "inline-remote-assets": "^0.7.0",
     "js-yaml": "^4.0.0",

@@ -172,6 +172,18 @@
   dependencies:
     "@types/node" "*"
 
+"@vue/reactivity@^3.0.2":
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/@vue/reactivity/-/reactivity-3.2.4.tgz#a020ad7e50f674219a07764b105b5922e61597ea"
+  integrity sha512-ljWTR0hr8Tn09hM2tlmWxZzCBPlgGLnq/k8K8X6EcJhtV+C8OzFySnbWqMWataojbrQOocThwsC8awKthSl2uQ==
+  dependencies:
+    "@vue/shared" "3.2.4"
+
+"@vue/shared@3.2.4":
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.2.4.tgz#ba2a09527afff27b28d08f921b4a597e9504ca7a"
+  integrity sha512-j2j1MRmjalVKr3YBTxl/BClSIc8UQ8NnPpLYclxerK65JIowI4O7n8O8lElveEtEoHxy1d7BelPUDI0Q4bumqg==
+
 a-sync-waterfall@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/a-sync-waterfall/-/a-sync-waterfall-1.0.1.tgz#75b6b6aa72598b497a125e7a2770f14f4c8a1fa7"
@@ -200,10 +212,12 @@ after@0.8.2:
   resolved "https://registry.yarnpkg.com/after/-/after-0.8.2.tgz#fedb394f9f0e02aa9768e702bda23b505fae7e1f"
   integrity sha1-/ts5T58OAqqXaOcCvaI7UF+ufh8=
 
-alpinejs@^2.8.2:
-  version "2.8.2"
-  resolved "https://registry.yarnpkg.com/alpinejs/-/alpinejs-2.8.2.tgz#b14ec21ae3cd78dcee4aed0a78ed0f01b676dac4"
-  integrity sha512-5yOUtckn4CBp0qsHpo2qgjZyZit84uXvHbB7NJ27sn4FA6UlFl2i9PGUAdTXkcbFvvxDJBM+zpOD8RuNYFvQAw==
+alpinejs@^3.2.4:
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/alpinejs/-/alpinejs-3.2.4.tgz#04dbda9df483cd686d3f0d183a074c5c98060810"
+  integrity sha512-nUHI7QarOyqFX1vKTP5MC54yBFh9/J+YyxE50aP3lb6aZGxwX0HIPGVuAwy2SXQFP45P4/jKHv1LOuvRp/etiQ==
+  dependencies:
+    "@vue/reactivity" "^3.0.2"
 
 ansi-regex@^2.0.0:
   version "2.1.1"

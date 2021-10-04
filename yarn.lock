@@ -461,10 +461,10 @@ bs-snippet-injector@^2.0.1:
   resolved "https://registry.yarnpkg.com/bs-snippet-injector/-/bs-snippet-injector-2.0.1.tgz#61b5393f11f52559ed120693100343b6edb04dd5"
   integrity sha1-YbU5PxH1JVntEgaTEANDtu2wTdU=
 
-buttondown@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/buttondown/-/buttondown-1.1.1.tgz#5c016cf0834ecf54cef23fe716ee799044025eb1"
-  integrity sha512-w9TGxTKmlTQiG3TnjCAX8+b8hQWag1LXLjNwdAn2H0lF73ZuwIBVOQGI56Zu2GF1fYPtbPQpLKWCjH1vYhTl+Q==
+buttondown@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/buttondown/-/buttondown-1.1.2.tgz#c3c70312cbce648966b98f26418fe617be00788c"
+  integrity sha512-vXkPWy3epVHwzgklM28r3CEGMKgcflyqp98AbiSVHlpXfY4Da4K9IL7oF+2sk4JKJ3VAjp1/58JlL4xfqdmLeg==
   dependencies:
     got "^11.0.2"
 

@@ -29,6 +29,6 @@
     "lolight": "^1.4.0",
     "node-fetch": "^2.6.1",
     "prettier": "^2.4.0",
-    "purgecss": "^4.0.3"
+    "purgecss": "^4.1.1"
   }
 }

@@ -20,7 +20,7 @@
   "dependencies": {},
   "devDependencies": {
     "@11ty/eleventy": "^0.12.1",
-    "alpinejs": "^2.8.2",
+    "alpinejs": "^3.9.0",
     "buttondown": "^1.1.1",
     "esbuild": "^0.12.10",
     "glob": "^7.2.0",

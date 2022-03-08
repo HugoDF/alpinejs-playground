@@ -27,7 +27,7 @@
     "inline-remote-assets": "^0.7.0",
     "js-yaml": "^4.1.0",
     "lolight": "^1.4.0",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^3.2.2",
     "prettier": "^2.4.0",
     "purgecss": "^4.0.3"
   }

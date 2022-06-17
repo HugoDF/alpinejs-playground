@@ -28,7 +28,7 @@
     "js-yaml": "^4.1.0",
     "lolight": "^1.4.0",
     "node-fetch": "^2.6.1",
-    "prettier": "^2.6.0",
+    "prettier": "^2.7.1",
     "purgecss": "^4.0.3"
   }
 }

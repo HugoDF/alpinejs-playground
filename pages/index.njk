@@ -91,49 +91,6 @@ eleventyExcludeFromCollections: true
           </li>
         </template>
       </ul>
-
-      <form
-        action="https://buttondown.email/api/emails/embed-subscribe/alpinejs"
-        method="post"
-        target="popupwindow"
-        onsubmit="window.open('https://buttondown.email/alpinejs', 'popupwindow')"
-        class="flex md:w-4/5 md:p-10 flex-col rounded mb-4 embeddable-buttondown-form"
-      >
-        <label
-          class="flex text-gray-700 font-semibold mb-2 text-sm"
-          for="bd-email"
-        >
-          Subscribe to Alpine.js Weekly
-        </label>
-        <p class="leading-relaxed flex text-sm mb-4">
-          A free, once–weekly email roundup of Alpine.js news and articles.
-        </p>
-        <input
-          placeholder="calebporzio@alpinejs.org"
-          class="flex mb-2 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 appearance-none leading-normal"
-          type="email"
-          name="email"
-          id="bd-email"
-          required="required"
-          autofocus
-        />
-        <input type="hidden" value="1" name="embed" />
-        <input
-          class="flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          type="submit"
-          value="Subscribe"
-        />
-      </form>
-      <div
-        class="fixed inset-x-0 bottom-0 bg-gray-500 text-white text-center min-h-8 md:h-10 flex items-center justify-center font-medium"
-      >
-        <p>
-          Get Early Access to the
-          <a class="underline" href="https://alpinejshandbook.com"
-            >Alpine.js Handbook</a
-          >
-        </p>
-      </div>
     </div>
     <script>
       // dump a bunch of data on the page

@@ -9,18 +9,18 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [lts/*]
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-    - name: yarn install, format, and build
+    - name: npm install, format, and build
       run: |
-        yarn
-        yarn format
-        yarn build
+        npm i
+        npm run format
+        npm run build
       env:
         CI: true
